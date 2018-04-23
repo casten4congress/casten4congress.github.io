@@ -1,1 +1,74 @@
-Hello World
+<!DOCTYPE html>
+<meta charset='utf-8'>
+<html lang="en-US">
+  <head>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.css">
+  <link rel="shortcut icon" href="http://ejerzyk.github.io/favicon.ico"/>
+  <script src="http://code.jquery.com/jquery-latest.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.js"></script>
+  <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+  <script type="text/javascript" src="http://d3js.org/topojson.v1.min.js"></script>
+  <script src="http://d3js.org/d3.geo.projection.v0.min.js"></script>
+  <style>
+      .icon {
+        height: 40px;
+        margin: 0px; !important
+      }
+      .navbar-center
+      {
+          position: absolute;
+          display: inline-block;
+          left: 0;
+          top: 0;
+          text-align: center;
+          float: none;
+          margin: 0 auto;
+        width: 100%;
+        line-height: 30px;
+      }
+  </style>
+    <title> Roskam Failed Us </title>
+  </head>
+  <body>
+  <div id="num_days">
+
+  </div>
+  <script>
+  var one_day = 1000*60*60*24; 
+  var days = Math.round(Math.abs(new Date() - new Date("2006/01/01"))/one_day);
+  document.getElementById("num_days").value = days;
+  </script>
+  <style>
+  div#footer {
+    width: 100%;
+    bottom: 0px;
+    left: 0px;
+    display: block;
+    clear: both;
+  }
+  #footer .container {
+    margin: 0;
+  }
+  #footer p {
+    padding: 0;
+    margin: 0;
+  }
+  #footer p a {
+    text-decoration: none;
+    color: #404040;
+  }
+  </style>
+  <br><br><br><br><br>
+  <div id="footer">
+    <div class="container">
+      This website is paid for by <a href="https://www.castenforcongress.com/">Casten for Congress</a>.
+    </div>
+  </div>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-64407002-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+  </body>
+</html>
