@@ -126,9 +126,9 @@ title: Precinct Data
 		<div id="2012PrimaryPresidential">
 		</div>
 		<div class="map"></div>
-		<script type="text/javascript" src="electiondata.js"></script>
-		<script type='text/javascript' src='language_spoken.js'></script>
-		<script type='text/javascript' src='voter_turnout.js'></script>
+		<script type="text/javascript" src="data/electiondata/electiondata.js"></script>
+		<script type='text/javascript' src='data/language/language_spoken.js'></script>
+		<script type='text/javascript' src='data/turnout/voter_turnout.js'></script>
 		<script type="text/javascript">
 			var gradient = ["#e5004d", "#ce0758", "#b70e63", "#a0166f", "#891d7a", "#722586", "#5b2c91", "#44339c", "#2d3ba8", "#1642b3", "#004abf"];
 			var pop_gradient = ["#FFFFFF", "#eaf8f1", "#d5f1e3", "#c1ead5", "#ace3c7", "#97dcba", "#83d5ac", "#6ece9e", "#59C790", "#45c183"];
@@ -360,64 +360,9 @@ title: Precinct Data
 							            		return precinct_name;
 							            	}
 							            });
-							            // .append('tspan')
-							            // .attr('x', '0')
-							            // .attr('y','0')
-							            // .text(function(d) {
-							            // 	var precinct_name = "";
-							            // 	if ('idpct_txt' in d.properties) { precinct_name = d.properties.idpct_txt;} 
-							            // 	else if ('PrecinctNa' in d.properties) { precinct_name = d.properties.PrecinctNa;} 
-							            // 	else if ('TWP_PCT' in d.properties) { precinct_name = d.properties.TWP_PCT; } 
-							            // 	else {
-							            // 		if (d.properties.PRECINCT.indexOf(" ") > -1) { precinct_name = d.properties.PRECINCT; } 
-							            // 		else { precinct_name = d.properties.PRECINCT.charAt(0) + d.properties.PRECINCT.charAt(1) + "00" + d.properties.PRECINCT.charAt(2) + d.properties.PRECINCT.charAt(3); }
-							            // 	}
-							            // 	if (precinct_name.length > 12) {
-							            // 		return precinct_name.substring(0,precinct_name.indexOf(' '));
-							            // 	}
-							            // 	return;
-							            // })
-							            // .append('tspan')
-							            // .attr('x', '0')
-							            // .attr('y','1em')
-							            // .text(function(d) {
-							            // 	var precinct_name = "";
-							            // 	if ('idpct_txt' in d.properties) { precinct_name = d.properties.idpct_txt;} 
-							            // 	else if ('PrecinctNa' in d.properties) { precinct_name = d.properties.PrecinctNa;} 
-							            // 	else if ('TWP_PCT' in d.properties) { precinct_name = d.properties.TWP_PCT; } 
-							            // 	else {
-							            // 		if (d.properties.PRECINCT.indexOf(" ") > -1) { precinct_name = d.properties.PRECINCT; } 
-							            // 		else { precinct_name = d.properties.PRECINCT.charAt(0) + d.properties.PRECINCT.charAt(1) + "00" + d.properties.PRECINCT.charAt(2) + d.properties.PRECINCT.charAt(3); }
-							            // 	}
-							            // 	if (precinct_name.length > 12) {
-							            // 		return precinct_name.substring(precinct_name.indexOf(' '));
-							            // 	}
-							            // 	return;
-							            // });
 							        });
 						}
 				});
-
-				if (census_tractsP) {
-					d3.json("census/illinois_censustracts_2016/illinois_census_tracts.json" , function(error, tracts) {
-						var projection = d3.geo.mercator().scale(scale).center(center).translate(offset);
-						var path = d3.geo.path().projection(projection);
-
-						svg.selectAll("path")
-							.data(tracts.features)
-							.enter()
-							.append("path")
-							.attr("d", path)
-							.attr("stroke", "#000000")
-							.attr("stroke-width", "1")
-							.attr("fill", "#31bf55")
-							.attr("opacity", "0.3")
-							.append("title")
-							.text(function(d) {
-								return d.properties.TRACTCE;
-							});
-					});
-				}
 				map = svg;
 			}
 
