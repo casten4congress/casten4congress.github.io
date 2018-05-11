@@ -1,0 +1,88 @@
+---
+layout: default
+title: Photos
+---
+<style>
+.gallery_image {
+	max-width: 100%; 
+	margin: 10px;
+}
+.jumbotron {
+	text-align: center;
+}
+</style>
+
+<div class="jumbotron">
+	<h3>Photographs</h3>
+</div>
+
+<div class="col-md-3">
+	{% for images in site.data.gallery %}
+		{% assign loopindex = forloop.index | modulo: 4 %}
+		{% if loopindex == 1 %}
+			<a href="gallery/{{ images.name }}">
+				<div class="col-md-11">
+					<img class="gallery_image" src="gallery/{{ images.name }}">
+				</div>
+			</a>
+		{% endif %}
+	{% endfor %}
+</div>
+
+<div class="col-md-3">
+	{% for images in site.data.gallery %}
+		{% assign loopindex = forloop.index | modulo: 4 %}
+		{% if loopindex == 2 %}
+			<a href="gallery/{{ images.name }}">
+				<div class="col-md-11">
+					<img class="gallery_image" src="gallery/{{ images.name }}">
+				</div>
+			</a>
+		{% endif %}
+	{% endfor %}
+</div>
+
+<div class="col-md-3">
+	{% for images in site.data.gallery %}
+		{% assign loopindex = forloop.index | modulo: 4 %}
+		{% if loopindex == 3 %}
+			<a href="gallery/{{ images.name }}">
+				<div class="col-md-11">
+					<img class="gallery_image" src="gallery/{{ images.name }}">
+				</div>
+			</a>
+		{% endif %}
+	{% endfor %}
+</div>
+
+<div class="col-md-3">
+	{% for images in site.data.gallery %}
+		{% assign loopindex = forloop.index | modulo: 4 %}
+		{% if loopindex == 0 %}
+			<a href="gallery/{{ images.name }}">
+				<div class="col-md-11">
+					<img class="gallery_image" src="gallery/{{ images.name }}">
+				</div>
+			</a>
+		{% endif %}
+	{% endfor %}
+</div>
+
+<!-- {% for images in site.data.gallery %}
+	{% assign loopindex = forloop.index | modulo: 4 %}
+	{% if loopindex == 3 or loopindex == 0 %}
+	<div class="col-md-3" class="right">
+	{% endif %}
+	{% if loopindex == 1 or loopindex == 2 %}
+	<div class="col-md-3" class="left">
+	{% endif %}
+		<a href="gallery/{{ images.name }}">
+			<div class="col-md-11">
+				<img class="gallery_image" src="gallery/{{ images.name }}">
+			</div>
+		</a>
+	</div>
+	{% if loopindex == 0 %}
+	<br>
+	{% endif %}
+{% endfor %} -->

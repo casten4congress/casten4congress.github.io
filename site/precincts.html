@@ -1,0 +1,458 @@
+---
+layout: default
+title: Precinct Data
+---
+		<style type="text/css">
+			svg {
+				float: left;
+				padding-bottom: 100px;
+				margin-bottom: 100px;
+			}
+			#date {
+				text-align: right;
+				margin-right: 50px;
+			}
+			.invisible input {
+				height: 0px;
+				width: 0px;
+				display: none;
+			}
+			.invisible label {
+				color: white;
+			}
+			form {
+				font-size: 18px;
+				padding: 10px;
+			}
+			input[type='radio'] {
+				margin: 10px;
+			}
+			h1 {
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			h3 {
+				padding-left: 10px;
+			}
+			h5 {
+				padding-left: 10px;
+			}
+			p {
+				padding-left: 10px;
+				padding-right: 10px;
+				padding-bottom: 0px;
+				padding-top: 0px;
+				margin: 0 0 0 0;
+			}
+			li {
+				padding: 0 0 0 0;
+				margin: 0 0 0 0;
+			}
+			#observations {
+				clear: both;
+			}
+		</style>
+		<div id='instructions' class='jumbotron'>
+			<h1>Precinct-level election data</h1>
+		</div>
+		<div id="data_type">
+			<b>Election:</b>
+			<select class="form-control" name="election" id="election_dropdown" onChange="change_map()">
+				<option value='2012PrimaryCongressional'>2012 Primary Congressional</option>
+				<option value="2012GeneralCongressional">2012 General Congressional</option>
+				<option value="2012GeneralPresidential">2012 General Presidential</option>
+				<option value='2014PrimaryCongressional'>2014 Primary Congressional</option>
+				<option value="2014GeneralCongressional">2014 General Congressional</option>
+				<option value='2016PrimaryCongressional'>2016 Primary Congressional</option>
+				<option value="2016PrimaryPresidential">2016 Primary Presidential</option>
+				<option value="2016GeneralCongressional">2016 General Congressional</option>
+				<option value="2016GeneralPresidential">2016 General Presidential</option>
+				<option value="2018PrimaryCongressional">2018 Primary Congressional</option>
+				<option value='languages'>Spanish speakers</option>
+				<option value='languagesAndVT'>Spanish speakers and turnout</option>
+				<option value='VT'>Voter turnout</option>
+				<option value="blank" checked>Blank with Precinct Names</option>
+			</select>
+		</div>
+		<div id="2016PrimaryPresidential">
+			<input class='form-check-input primary-chkbx' type='checkbox' id="HILLARY CLINTON 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="HILLARY CLINTON 2016">HILLARY CLINTON</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="BERNIE SANDERS 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="BERNIE SANDERS 2016">BERNIE SANDERS</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="WILLIE L_ WILSON 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="WILLIE L_ WILSON 2016">WILLIE L_ WILSON</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="MARTIN J_ O'MALLEY 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="MARTIN J_ O'MALLEY 2016">MARTIN J_ O'MALLEY</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="LARRY COHEN 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="LARRY COHEN 2016">LARRY COHEN</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="ROQUE ROCKY DE LA FUENTE 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="ROQUE ROCKY DE LA FUENTE 2016">ROQUE ROCKY DE LA FUENTE</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="DAVID FORMHALS 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="DAVID FORMHALS 2016">DAVID FORMHALS</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="BRIAN O'NEILL w-in 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="BRIAN O'NEILL w-in 2016">BRIAN O'NEILL w-in</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="DONALD J_ TRUMP 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="DONALD J_ TRUMP 2016">DONALD J_ TRUMP</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="TED CRUZ 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="TED CRUZ 2016">TED CRUZ</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="JOHN R_ KASICH 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="JOHN R_ KASICH 2016">JOHN R_ KASICH</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="MARCO RUBIO 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="MARCO RUBIO 2016">MARCO RUBIO</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="BEN CARSON 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="BEN CARSON 2016">BEN CARSON</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="JEB BUSH 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="JEB BUSH 2016">JEB BUSH</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="RAND PAUL 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="RAND PAUL 2016">RAND PAUL</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="CHRIS CHRISTIE 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="CHRIS CHRISTIE 2016">CHRIS CHRISTIE</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="MIKE HUCKABEE 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="MIKE HUCKABEE 2016">MIKE HUCKABEE</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="CARLY FIORINA 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="CARLY FIORINA 2016">CARLY FIORINA</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="RICK SANTORUM 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="RICK SANTORUM 2016">RICK SANTORUM</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="JOANN BREIVOGEL 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="JOANN BREIVOGEL 2016">JOANN BREIVOGEL</label><br>
+			<!-- <input type="checkbox" id="census_tractsP" onclick="change_map()" checked><label for="census_tractsP">Include census tract overlay?</label> -->
+		</div>
+		<div id="2012PrimaryCongressional">
+			<input class='form-check-input primary-chkbx' type='checkbox' id="Maureen E. Yates 2012" onClick='change_map()'><label class='form-check-label primary-chkbx' for="Maureen E. Yates 2012">Maureen E. Yates</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="Peter J. Roskam 2012" onClick='change_map()'><label class='form-check-label primary-chkbx' for="Peter J. Roskam 2012">Peter J. Roskam</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="Geoffrey Petzel 2012" onClick='change_map()'><label class='form-check-label primary-chkbx' for="Geoffrey Petzel 2012">Geoffrey Petzel</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="Leslie Coolidge 2012" onClick='change_map()'><label class='form-check-label primary-chkbx' for="Leslie Coolidge 2012">Leslie Coolidge</label><br>
+		</div>
+		<div id="2014PrimaryCongressional">
+			<input class='form-check-input primary-chkbx' type='checkbox' id="Michael Mason 2014" onClick='change_map()'><label class='form-check-label primary-chkbx' for="Michael Mason 2014">Michael Mason</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="Peter J. Roskam 2014" onClick='change_map()'><label class='form-check-label primary-chkbx' for="Peter J. Roskam 2014">Peter J. Roskam</label><br>
+		</div>
+		<div id="2016PrimaryCongressional">
+			<input class='form-check-input primary-chkbx' type='checkbox' id="Amanda Howland 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="Amanda Howland 2016">Amanda Howland</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="Gordon (Jay) Kinzler 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="Gordon (Jay) Kinzler 2016">Gordon (Jay) Kinzler</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="Robert Marshall 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="Robert Marshall 2016">Robert Marshall</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="Peter J. Roskam 2016" onClick='change_map()'><label class='form-check-label primary-chkbx' for="Peter J. Roskam 2016">Peter J. Roskam</label><br>
+		</div>
+		<div id="2018PrimaryCongressional">
+			<input class='form-check-input primary-chkbx' type='checkbox' id="Kelly Mazeski 2018" onClick='change_map()'><label class='form-check-label primary-chkbx' for="Kelly Mazeski 2018">Kelly Mazeski</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="Amanda Howland 2018" onClick='change_map()'><label class='form-check-label primary-chkbx' for="Amanda Howland 2018">Amanda Howland</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="Sean Casten 2018" onClick='change_map()'><label class='form-check-label primary-chkbx' for="Sean Casten 2018">Sean Casten</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="Jennifer Zordani 2018" onClick='change_map()'><label class='form-check-label primary-chkbx' for="Jennifer Zordani 2018">Jennifer Zordani</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="Becky Anderson Wilkins 2018" onClick='change_map()'><label class='form-check-label primary-chkbx' for="Becky Anderson Wilkins 2018">Becky Anderson Wilkins</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="Ryan Huffman 2018" onClick='change_map()'><label class='form-check-label primary-chkbx' for="Ryan Huffman 2018">Ryan Huffman</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="Carole Cheney 2018" onClick='change_map()'><label class='form-check-label primary-chkbx' for="Carole Cheney 2018">Carole Cheney</label><br>
+			<input class='form-check-input primary-chkbx' type='checkbox' id="Peter J. Roskam 2018" onClick='change_map()'><label class='form-check-label primary-chkbx' for="Peter J. Roskam 2018">Peter J. Roskam</label><br>
+		</div>
+		<div id="2012PrimaryPresidential">
+		</div>
+		<div class="map"></div>
+		<script type="text/javascript" src="electiondata.js"></script>
+		<script type='text/javascript' src='language_spoken.js'></script>
+		<script type='text/javascript' src='voter_turnout.js'></script>
+		<script type="text/javascript">
+			var gradient = ["#e5004d", "#ce0758", "#b70e63", "#a0166f", "#891d7a", "#722586", "#5b2c91", "#44339c", "#2d3ba8", "#1642b3", "#004abf"];
+			var pop_gradient = ["#FFFFFF", "#eaf8f1", "#d5f1e3", "#c1ead5", "#ace3c7", "#97dcba", "#83d5ac", "#6ece9e", "#59C790", "#45c183"];
+			var map_width = 1000;
+			var map_height = 1600;
+			var map;
+			var laws;
+
+			var precincts = ['Naperville 51', 'Downers Grove 47', 'Addison 37', 'Downers Grove 46', 'Addison 36', 'Winfield 41', 'Winfield 40', 'Naperville 8', 'Naperville 9', 'Downers Grove 89', 'Downers Grove 88', 'Downers Grove 87', 'Naperville 1', 'Downers Grove 85', 'Downers Grove 84', 'Downers Grove 83', 'Downers Grove 82', 'Naperville 6', 'Naperville 7', 'York 100', 'Downers Grove 15', 'Downers Grove 16', 'Downers Grove 17', 'Downers Grove 10', 'Downers Grove 11', 'Downers Grove 12', 'York 107', 'York 108', 'York 109', 'Milton 126', 'Downers Grove 18', 'Downers Grove 19', 'Addison 38', 'York 40', 'York 41', 'York 42', 'York 43', 'York 44', 'York 45', 'York 46', 'York 47', 'York 48', 'York 49', 'Milton 55', 'Lisle 43', 'Lisle 52', 'Milton 56', 'Milton 51', 'Lisle 55', 'Lisle 56', 'Milton 52', 'Lisle 58', 'Lisle 59', 'Milton 59', 'Downers Grove 121', 'Downers Grove 120', 'Winfield 32', 'Downers Grove 127', 'Lisle 46', 'Naperville 38', 'Naperville 39', 'Lisle 45', 'Naperville 30', 'Naperville 31', 'Naperville 32', 'Lisle 44', 'Naperville 34', 'Naperville 35', 'Naperville 36', 'Naperville 37', 'Lisle 25', 'Lisle 24', 'Lisle 27', 'Milton 78', 'Lisle 21', 'Lisle 20', 'Downers Grove 118', 'Downers Grove 119', 'Downers Grove 116', 'Downers Grove 117', 'Downers Grove 114', 'Downers Grove 115', 'Downers Grove 112', 'Downers Grove 113', 'Downers Grove 110', 'Downers Grove 111', 'Wayne 50', 'Wayne 53', 'Wayne 52', 'Wayne 55', 'Wayne 54', 'Wayne 57', 'Wayne 56', 'Wayne 59', 'Wayne 58', 'Downers Grove 146', 'Naperville 63', 'Milton 72', 'Milton 71', 'Milton 70', 'Naperville 67', 'Naperville 66', 'Milton 119', 'Naperville 49', 'Naperville 48', 'Milton 111', 'Milton 110', 'Milton 113', 'Milton 112', 'Milton 115', 'Milton 114', 'Naperville 43', 'Milton 116', 'Addison 39', 'Bloomingdale 5', 'Bloomingdale 4', 'Bloomingdale 7', 'Bloomingdale 6', 'Bloomingdale 1', 'Bloomingdale 3', 'Bloomingdale 2', 'Bloomingdale 9', 'Bloomingdale 8', 'Bloomingdale 42', 'Bloomingdale 43', 'Bloomingdale 40', 'Bloomingdale 41', 'Bloomingdale 46', 'Bloomingdale 47', 'Bloomingdale 44', 'Bloomingdale 45', 'Bloomingdale 48', 'Bloomingdale 49', 'Naperville 10', 'Naperville 11', 'Naperville 16', 'Naperville 17', 'York 39', 'York 38', 'Naperville 14', 'York 31', 'York 30', 'York 33', 'Naperville 15', 'York 35', 'York 34', 'York 37', 'York 36', 'Winfield 4', 'Winfield 5', 'Downers Grove 49', 'Winfield 7', 'Winfield 1', 'Winfield 2', 'Winfield 3', 'Downers Grove 43', 'Downers Grove 42', 'Downers Grove 41', 'Downers Grove 40', 'Winfield 8', 'Winfield 9', 'Downers Grove 45', 'Downers Grove 44', 'Naperville 19', 'Bloomingdale 37', 'Bloomingdale 36', 'Bloomingdale 35', 'Bloomingdale 34', 'Bloomingdale 33', 'Bloomingdale 32', 'Bloomingdale 31', 'Bloomingdale 30', 'Bloomingdale 39', 'Bloomingdale 38', 'Winfield 29', 'Downers Grove 86', 'Naperville 2', 'Downers Grove 149', 'Naperville 3', 'Naperville 4', 'Naperville 5', 'Lisle 87', 'Lisle 86', 'Lisle 85', 'Lisle 84', 'Lisle 83', 'Lisle 82', 'Lisle 81', 'Lisle 80', 'Downers Grove 80', 'Lisle 89', 'Lisle 88', 'Winfield 16', 'Winfield 17', 'Winfield 14', 'Winfield 15', 'Winfield 12', 'Winfield 13', 'Winfield 10', 'Winfield 11', 'Downers Grove 81', 'Winfield 18', 'Winfield 19', 'Milton 91', 'Milton 90', 'Milton 93', 'Milton 92', 'Milton 95', 'Milton 94', 'Milton 97', 'Milton 96', 'Milton 99', 'Milton 98', 'Lisle 16', 'Lisle 17', 'Lisle 10', 'Lisle 11', 'Lisle 12', 'Lisle 13', 'Wayne 68', 'Wayne 60', 'Wayne 67', 'Wayne 1', 'Wayne 3', 'Wayne 2', 'Wayne 5', 'Wayne 4', 'Wayne 7', 'Wayne 6', 'Wayne 9', 'Wayne 8', 'Lisle 70', 'Winfield 24', 'Addison 53', 'Addison 52', 'Addison 51', 'Addison 50', 'Wayne 19', 'Wayne 18', 'Addison 55', 'Addison 54', 'Wayne 15', 'Wayne 14', 'Wayne 17', 'Wayne 16', 'Wayne 11', 'Wayne 10', 'Wayne 13', 'Wayne 12', 'Downers Grove 14', 'York 101', 'Lisle 26', 'York 102', 'Wayne 29', 'York 103', 'York 104', 'York 105', 'York 106', 'Bloomingdale 72', 'Bloomingdale 71', 'Downers Grove 13', 'Bloomingdale 77', 'York 125', 'York 131', 'Downers Grove 51', 'York 113', 'York 112', 'York 111', 'York 110', 'Winfield 27', 'York 116', 'York 115', 'York 114', 'York 119', 'York 118', 'York 79', 'York 78', 'York 75', 'York 74', 'York 77', 'York 76', 'York 71', 'York 70', 'York 73', 'York 72', 'Milton 46', 'Milton 47', 'Milton 44', 'Lisle 40', 'Milton 42', 'Milton 43', 'Milton 40', 'Milton 41', 'Downers Grove 129', 'Downers Grove 128', 'Milton 48', 'Milton 49', 'York 97', 'York 96', 'York 95', 'York 94', 'York 93', 'York 92', 'York 91', 'York 90', 'Lisle 2', 'York 99', 'York 98', 'Lisle 104', 'Lisle 107', 'Lisle 106', 'Lisle 101', 'Lisle 100', 'Winfield 28', 'Downers Grove 25', 'Winfield 26', 'Winfield 25', 'Wayne 24', 'Wayne 25', 'Wayne 26', 'Wayne 27', 'Wayne 20', 'Wayne 21', 'Wayne 22', 'Wayne 23', 'Addison 13', 'Wayne 28', 'Milton 57', 'Addison 12', 'Lisle 53', 'Addison 11', 'Lisle 54', 'Addison 10', 'Milton 50', 'Milton 53', 'Addison 19', 'Addison 18', 'Addison 17', 'Addison 16', 'Addison 15', 'Addison 14', 'Winfield 23', 'Winfield 22', 'Winfield 21', 'Winfield 20', 'Milton 128', 'Milton 129', 'Naperville 58', 'Naperville 59', 'Milton 124', 'Naperville 57', 'Naperville 54', 'Naperville 55', 'Milton 120', 'Naperville 53', 'Milton 122', 'Milton 123', 'Milton 58', 'Naperville 56', 'Milton 125', 'Lisle 51', 'Milton 127', 'Naperville 52', 'Naperville 50', 'Addison 62', 'Addison 63', 'Addison 60', 'Addison 61', 'Lisle 4', 'Downers Grove 78', 'Downers Grove 79', 'Downers Grove 76', 'Downers Grove 77', 'Downers Grove 74', 'Downers Grove 75', 'Downers Grove 72', 'Downers Grove 73', 'Downers Grove 70', 'Downers Grove 71', 'York 9', 'York 8', 'York 7', 'York 6', 'York 5', 'York 4', 'York 3', 'York 2', 'York 1', 'Bloomingdale 24', 'Bloomingdale 25', 'Bloomingdale 26', 'Bloomingdale 27', 'Bloomingdale 20', 'Bloomingdale 21', 'Bloomingdale 22', 'Bloomingdale 23', 'Lisle 18', 'Bloomingdale 28', 'Bloomingdale 29', 'Lisle 19', 'Addison 9', 'Addison 8', 'Addison 7', 'Addison 6', 'Addison 5', 'Addison 4', 'Addison 3', 'Addison 2', 'Addison 1', 'Lisle 14', 'Lisle 15', 'Naperville 84', 'York 26', 'York 27', 'York 24', 'York 25', 'York 22', 'York 23', 'York 20', 'York 21', 'Lisle 42', 'York 28', 'York 29', 'Naperville 33', 'Milton 39', 'Milton 38', 'Milton 37', 'Milton 36', 'Milton 35', 'Milton 34', 'Milton 33', 'Milton 32', 'Milton 31', 'Milton 30', 'Lisle 41', 'Naperville 68', 'Naperville 20', 'Milton 82', 'Milton 83', 'Milton 80', 'Milton 81', 'Milton 86', 'Milton 87', 'Milton 84', 'Milton 85', 'Milton 88', 'Milton 89', 'Lisle 23', 'Lisle 22', 'Lisle 47', 'Downers Grove 2', 'Downers Grove 3', 'Downers Grove 1', 'Downers Grove 6', 'Downers Grove 7', 'Downers Grove 4', 'Downers Grove 5', 'Lisle 29', 'Downers Grove 8', 'Downers Grove 9', 'Lisle 28', 'Addison 26', 'Addison 27', 'Addison 24', 'Addison 25', 'Addison 22', 'Addison 23', 'Addison 20', 'Addison 21', 'Addison 28', 'Addison 29', 'Naperville 12', 'York 124', 'Downers Grove 123', 'Bloomingdale 68', 'Bloomingdale 69', 'Naperville 13', 'Bloomingdale 60', 'Bloomingdale 61', 'Bloomingdale 62', 'Bloomingdale 63', 'Bloomingdale 64', 'Bloomingdale 65', 'Bloomingdale 66', 'Bloomingdale 67', 'Democratic State Central Committeewoman, 6Th Congressional District - D*', 'Downers Grove 122', 'Naperville 95', 'York 19', 'York 18', 'York 17', 'York 16', 'York 15', 'York 14', 'York 13', 'York 12', 'York 11', 'York 10', 'York 126', 'York 127', 'Downers Grove 38', 'Downers Grove 39', 'York 122', 'York 123', 'York 120', 'York 121', 'Downers Grove 32', 'Downers Grove 33', 'Downers Grove 30', 'Downers Grove 31', 'Downers Grove 36', 'Downers Grove 37', 'Downers Grove 34', 'Lisle 5', 'Lisle 57', 'York 68', 'York 69', 'Milton 45', 'York 62', 'York 63', 'York 60', 'York 61', 'York 66', 'York 67', 'York 64', 'York 65', 'Lisle 76', 'Lisle 77', 'Lisle 74', 'Lisle 75', 'Downers Grove 130', 'Downers Grove 131', 'Downers Grove 132', 'Lisle 71', 'Lisle 49', 'Lisle 78', 'Lisle 79', 'York 84', 'York 85', 'York 86', 'York 87', 'York 80', 'York 81', 'York 82', 'York 83', 'York 88', 'York 89', 'Lisle 116', 'Lisle 117', 'Lisle 114', 'Lisle 115', 'Lisle 112', 'Lisle 48', 'Lisle 111', 'Downers Grove 126', 'Addison 57', 'Addison 56', 'Wayne 37', 'Wayne 36', 'Wayne 35', 'Wayne 34', 'Wayne 33', 'Wayne 32', 'Wayne 31', 'Wayne 30', 'Lisle 8', 'Wayne 39', 'Wayne 38', 'Downers Grove 125', 'Lisle 36', 'Lisle 9', 'Addison 59', 'Addison 58', 'Winfield 38', 'Winfield 39', 'Winfield 34', 'Winfield 35', 'Winfield 36', 'Winfield 37', 'Winfield 30', 'Winfield 31', 'Downers Grove 124', 'Winfield 33', 'Downers Grove 141', 'Downers Grove 140', 'Milton 79', 'Downers Grove 142', 'Downers Grove 145', 'Naperville 65', 'Downers Grove 147', 'Lisle 3', 'Milton 73', 'Naperville 62', 'Naperville 61', 'Naperville 60', 'Milton 77', 'Milton 76', 'Milton 75', 'Milton 74', 'Lisle 1', 'Lisle 6', 'Lisle 93', 'Lisle 7', 'Naperville 64', 'York 128', 'York 129', 'Naperville 18', 'Bloomingdale 80', 'Lisle 67', 'Bloomingdale 89', 'Naperville 45', 'Naperville 44', 'Naperville 47', 'Naperville 46', 'Lisle 66', 'Naperville 41', 'Naperville 40', 'Bloomingdale 11', 'Bloomingdale 10', 'Bloomingdale 13', 'Bloomingdale 12', 'Bloomingdale 15', 'Bloomingdale 14', 'Bloomingdale 17', 'Bloomingdale 16', 'Bloomingdale 19', 'Bloomingdale 18', 'Naperville 42', 'Downers Grove 98', 'Downers Grove 99', 'Downers Grove 94', 'Downers Grove 95', 'Downers Grove 96', 'Downers Grove 97', 'Downers Grove 90', 'Downers Grove 91', 'Downers Grove 92', 'Downers Grove 93', 'Lisle 72', 'Naperville 96', 'Lisle 73', 'Downers Grove 61', 'Downers Grove 60', 'Downers Grove 63', 'Downers Grove 62', 'Downers Grove 65', 'Downers Grove 64', 'Downers Grove 67', 'Downers Grove 66', 'Downers Grove 69', 'Downers Grove 68', 'York 53', 'York 52', 'York 51', 'York 50', 'York 57', 'York 56', 'York 55', 'York 54', 'York 59', 'York 58', 'Downers Grove 148', 'Milton 20', 'Milton 21', 'Milton 22', 'Milton 23', 'Milton 24', 'Milton 25', 'Milton 26', 'Milton 27', 'Milton 28', 'Milton 29', 'Lisle 50', 'Lisle 61', 'Lisle 60', 'Lisle 63', 'Lisle 62', 'Naperville 29', 'Naperville 28', 'Naperville 27', 'Naperville 26', 'Naperville 25', 'Naperville 24', 'Naperville 23', 'Naperville 22', 'Naperville 21', 'Lisle 64', 'Lisle 32', 'Lisle 33', 'Lisle 30', 'Lisle 31', 'Downers Grove 109', 'Lisle 37', 'Lisle 34', 'Lisle 35', 'Downers Grove 105', 'Downers Grove 104', 'Downers Grove 107', 'Downers Grove 106', 'Downers Grove 101', 'Downers Grove 100', 'Downers Grove 103', 'Downers Grove 102', 'Bloomingdale 70', 'Wayne 48', 'Wayne 49', 'Wayne 46', 'Wayne 47', 'Wayne 44', 'Wayne 42', 'Wayne 43', 'Wayne 40', 'Wayne 41', 'Milton 9', 'Milton 8', 'Milton 1', 'Milton 3', 'Milton 2', 'Milton 5', 'Milton 4', 'Milton 7', 'Milton 6', 'Addison 35', 'Addison 34', 'Milton 108', 'Milton 109', 'Addison 31', 'Addison 30', 'Addison 33', 'Addison 32', 'Milton 102', 'Milton 103', 'Milton 100', 'Milton 101', 'Milton 106', 'Milton 107', 'Milton 104', 'Milton 105', 'Lisle 38', 'Bloomingdale 55', 'Bloomingdale 54', 'Bloomingdale 57', 'Lisle 39', 'Bloomingdale 51', 'Bloomingdale 50', 'Bloomingdale 53', 'Bloomingdale 52', 'Bloomingdale 59', 'Bloomingdale 58', 'Downers Grove 58', 'Downers Grove 59', 'Downers Grove 50', 'York 130', 'Downers Grove 52', 'Downers Grove 53', 'Downers Grove 54', 'Downers Grove 55', 'Downers Grove 56', 'Downers Grove 57', 'Downers Grove 29', 'Downers Grove 28', 'Milton 54', 'Downers Grove 24', 'Downers Grove 27', 'Downers Grove 26', 'Downers Grove 21', 'Downers Grove 20', 'Downers Grove 23', 'Downers Grove 22', 'Naperville 69', 'Lisle 65', 'Lisle 126', 'Downers Grove 35', 'Milton 19', 'Milton 18', 'Milton 11', 'Milton 10', 'Milton 13', 'Milton 12', 'Milton 15', 'Milton 14', 'Milton 17', 'Milton 16', 'Lisle 94', 'Lisle 95', 'Lisle 96', 'Lisle 97', 'Lisle 90', 'Lisle 91', 'Lisle 92', 'Bloomingdale 56', 'Lisle 98', 'Total:', 'Downers Grove 108', 'Lisle 69', 'Lisle 68', 'Downers Grove 151', 'Milton 68', 'Milton 69', 'Downers Grove 154', 'Milton 64', 'Milton 65', 'Milton 66', 'Milton 67', 'Milton 60', 'Milton 61', 'Milton 62', 'Milton 63', 'York 32', 'York 117', 'Milton 130', 'Winfield 6', 'Downers Grove 48', 'Addison 48', 'Addison 49', 'Addison 44', 'Addison 45', 'Addison 46', 'Addison 47', 'Addison 40', 'Addison 41', 'Addison 42', 'Addison 43', '8700020', '8700021', '8700022', '8700023', '8700024', '8700025', '8700026', '8700027', '8700028', '8700029', '7900069', '7900068', '7900061', '7900060', '7900063', '7900062', '7900065', '7900064', '7900067', '7900066', '7600042', '7600043', '7600040', '7600041', '7600044', '7700003', '7700002', '8700019', '8700018', '8700015', '8700014', '8700017', '8700016', '8700011', '8700010', '8700013', '8700012', '7900076', '7900077', '7900074', '7900075', '7900072', '7900073', '7900070', '7900071', '7900078', '7900032', '7900033', '7000012', '7000011', '7000010', '7900030', '7900031', '7900036', '7900037', '7600037', '7600036', '8700008', '8700009', '7600033', '7600032', '7600031', '7600030', '8700002', '8700003', '8700001', '8700006', '8700007', '7600039', '7600038', '7900003', '7900002', '7900001', '7900007', '7900006', '7900005', '7900004', '7900009', '7900008', '7000008', '7000009', '7000001', '7000002', '7000003', '7000004', '7000005', '7000006', '7000007', '7900035', '7600024', '7600025', '7600026', '7600027', '7600020', '7600021', '7600022', '7600023', '7900029', '7600028', '7600029', '7900028', '7900010', '7900011', '7900012', '7900013', '7900014', '7900015', '7600035', '7900017', '7900018', '7900019', '7900025', '7900024', '8700066', '7900026', '7900034', '7900021', '7900020', '7600011', '7600010', '7600013', '7600012', '7600015', '7600014', '7600017', '7600016', '7600019', '7600018', '7900022', '8700068', '8700069', '8700064', '8700065', '7900027', '8700067', '8700060', '8700061', '7900023', '8700063', '7900053', '7600008', '7600009', '7600006', '7600007', '7600004', '7600005', '7600002', '7600003', '7600001', '7700001', '8700058', '7900038', '7900039', '7700005', '7900016', '7700007', '7700006', '8700051', '8700050', '8700053', '8700052', '8700055', '8700054', '8700057', '8700056', '7600034', '7700004', '8700046', '8700047', '8700044', '8700045', '8700042', '8700043', '8700040', '8700041', '8700048', '8700049', '8700059', '7700014', '7700012', '7700013', '7700010', '7700011', '8700062', '8700004', '7900049', '7900048', '7900047', '7900046', '7900045', '7900044', '7900043', '7900042', '7900041', '7900040', '8700033', '8700032', '8700031', '8700030', '8700037', '8700036', '8700035', '8700034', '8700039', '8700038', '7700009', '7900058', '7900059', '8700005', '7900054', '7900055', '7900056', '7900057', '7900050', '7900051', '7900052', '7700008', 'West Deerfield 393', 'West Deerfield 392', 'West Deerfield 391', 'West Deerfield 390', 'West Deerfield 397', 'West Deerfield 396', 'West Deerfield 395', 'West Deerfield 394', 'West Deerfield 399', 'West Deerfield 398', 'Antioch 13', 'Antioch 12', 'Antioch 11', 'Antioch 10', 'Vernon 280', 'Vernon 281', 'Vernon 282', 'Antioch 14', 'West Deerfield 402', 'West Deerfield 401', 'West Deerfield 400', 'Lake Villa 160', 'Lake Villa 161', 'Lake Villa 162', 'Lake Villa 163', 'Lake Villa 164', 'Lake Villa 165', 'Lake Villa 166', 'Shields 238', 'Shields 239', 'Shields 232', 'Shields 233', 'Shields 230', 'Shields 231', 'Shields 236', 'Shields 237', 'Shields 234', 'Shields 235', 'Avon 18', 'Avon 19', 'Ela 79', 'Ela 78', 'Ela 95', 'Ela 94', 'Ela 97', 'Ela 96', 'Ela 91', 'Ela 90', 'Ela 93', 'Ela 92', 'Ela 99', 'Ela 98', 'Grant 137', 'Grant 136', 'Grant 135', 'Grant 134', 'Grant 133', 'Grant 132', 'Grant 131', 'Grant 130', 'Grant 139', 'Grant 138', 'Cuba 64', 'Cuba 65', 'Cuba 66', 'Cuba 67', 'Cuba 68', 'Cuba 69', 'Vernon 284', 'Vernon 259', 'Vernon 258', 'Vernon 257', 'Vernon 256', 'Vernon 255', 'Vernon 254', 'Vernon 253', 'Vernon 252', 'Vernon 251', 'Vernon 250', 'Moraine 220', 'Moraine 221', 'Moraine 222', 'Moraine 223', 'Moraine 224', 'Antioch 17', 'Antioch 16', 'Antioch 15', 'Fremont 118', 'Fremont 119', 'Fremont 116', 'Fremont 117', 'Fremont 114', 'Fremont 115', 'Fremont 112', 'Fremont 113', 'Fremont 110', 'Fremont 111', 'Avon 23', 'Avon 22', 'Avon 21', 'Avon 20', 'Avon 27', 'Avon 26', 'Avon 25', 'Avon 24', 'Avon 29', 'Avon 28', 'Wauconda 329', 'Wauconda 328', 'Newport 225', 'Newport 226', 'Newport 227', 'Newport 228', 'Newport 229', 'Waukegan 346', 'Waukegan 347', 'Waukegan 344', 'Waukegan 345', 'Waukegan 343', 'Waukegan 348', 'Waukegan 349', 'Waukegan 360', 'Waukegan 361', 'Warren 290', 'Waukegan 363', 'Waukegan 364', 'Waukegan 365', 'Zion 411', 'Libertyville 188', 'Libertyville 189', 'Libertyville 186', 'Libertyville 187', 'Libertyville 184', 'Libertyville 185', 'Libertyville 182', 'Libertyville 183', 'Libertyville 180', 'Libertyville 181', 'Shields 246', 'Shields 245', 'Shields 244', 'Shields 243', 'Shields 242', 'Shields 241', 'Shields 240', 'Vernon 266', 'Vernon 267', 'Vernon 264', 'Vernon 265', 'Vernon 262', 'Vernon 263', 'Vernon 260', 'Vernon 261', 'Vernon 268', 'Vernon 269', 'Fremont 126', 'Fremont 125', 'Fremont 124', 'Fremont 123', 'Fremont 122', 'Fremont 121', 'Fremont 120', 'Libertyville 201', 'Libertyville 200', 'Libertyville 202', 'Grant 128', 'Grant 129', 'Grant 127', 'Zion 408', 'Zion 409', 'Zion 404', 'Zion 405', 'Zion 406', 'Zion 407', 'Zion 403', 'Moraine 215', 'Moraine 214', 'Moraine 217', 'Lake Villa 145', 'Moraine 211', 'Moraine 210', 'Moraine 213', 'Moraine 212', 'Moraine 219', 'Moraine 218', 'Lake Villa 148', 'Lake Villa 149', 'Avon 30', 'Avon 31', 'Avon 32', 'Avon 33', 'Avon 34', 'Avon 35', 'Avon 36', 'Avon 37', 'Avon 38', 'Avon 39', 'Moraine 216', 'Warren 308', 'Warren 309', 'Warren 300', 'Warren 301', 'Warren 302', 'Warren 303', 'Warren 304', 'Warren 305', 'Warren 306', 'Warren 307', 'Waukegan 351', 'Waukegan 350', 'Waukegan 353', 'Waukegan 352', 'Waukegan 355', 'Waukegan 354', 'Waukegan 357', 'Waukegan 356', 'Waukegan 359', 'Waukegan 358', 'Libertyville 191', 'Libertyville 190', 'Libertyville 193', 'Libertyville 192', 'Libertyville 195', 'Libertyville 194', 'Libertyville 197', 'Libertyville 196', 'Libertyville 199', 'Libertyville 198', 'Antioch 9', 'Antioch 8', 'Antioch 3', 'Antioch 2', 'Antioch 1', 'Antioch 7', 'Antioch 6', 'Antioch 5', 'Antioch 4', 'Waukegan 362', 'Libertyville 168', 'Libertyville 169', 'Libertyville 167', 'Vernon 275', 'Vernon 274', 'Vernon 277', 'Vernon 276', 'Vernon 271', 'Vernon 270', 'Vernon 273', 'Vernon 272', 'Vernon 279', 'Vernon 278', 'Waukegan 366', 'Avon 49', 'Avon 48', 'Waukegan 367', 'Avon 41', 'Avon 40', 'Avon 43', 'Avon 42', 'Avon 45', 'Avon 44', 'Avon 47', 'Avon 46', 'Wauconda 341', 'Wauconda 340', 'Wauconda 342', 'Benton 54', 'Benton 55', 'Benton 56', 'Benton 57', 'Benton 51', 'Benton 52', 'Benton 53', 'Benton 58', 'Benton 59', 'Vernon 285', 'Waukegan 368', 'Waukegan 369', 'Warren 298', 'Warren 299', 'Warren 292', 'Warren 293', 'Zion 415', 'Warren 291', 'Warren 296', 'Warren 297', 'Warren 294', 'Warren 295', 'Vernon 286', 'Warren 327', 'Vernon 287', 'West Deerfield 388', 'West Deerfield 389', 'West Deerfield 384', 'West Deerfield 385', 'West Deerfield 386', 'West Deerfield 387', 'West Deerfield 380', 'West Deerfield 381', 'West Deerfield 382', 'West Deerfield 383', 'Moraine 208', 'Moraine 209', 'Moraine 203', 'Moraine 206', 'Moraine 207', 'Moraine 204', 'Moraine 205', 'Lake Villa 155', 'Lake Villa 154', 'Lake Villa 157', 'Lake Villa 156', 'Lake Villa 151', 'Lake Villa 150', 'Lake Villa 153', 'Lake Villa 152', 'Lake Villa 159', 'Lake Villa 158', 'Warren 326', 'Ela 104', 'Ela 105', 'Ela 102', 'Ela 103', 'Ela 100', 'Ela 101', 'Vernon 283', 'Ela 86', 'Ela 87', 'Ela 84', 'Ela 85', 'Ela 82', 'Ela 83', 'Ela 80', 'Ela 81', 'Ela 88', 'Ela 89', 'Zion 414', 'Warren 319', 'Warren 318', 'Warren 317', 'Warren 316', 'Warren 315', 'Warren 314', 'Warren 313', 'Warren 312', 'Warren 311', 'Warren 310', 'Zion 413', 'Zion 412', 'Benton 61', 'Benton 60', 'Benton 63', 'Benton 62', 'Lake Villa 146', 'Lake Villa 147', 'Lake Villa 144', 'Cuba 73', 'Cuba 72', 'Cuba 71', 'Cuba 70', 'Cuba 77', 'Cuba 76', 'Cuba 75', 'Cuba 74', 'Lake Villa 143', 'Zion 410', 'Libertyville 179', 'Libertyville 178', 'Libertyville 177', 'Libertyville 176', 'Libertyville 175', 'Libertyville 174', 'Libertyville 173', 'Libertyville 172', 'Libertyville 171', 'Libertyville 170', 'Vernon 248', 'Vernon 249', 'Vernon 247', 'Fremont 109', 'Fremont 108', 'Fremont 107', 'Fremont 106', 'Avon 50', 'Wauconda 330', 'Wauconda 331', 'Wauconda 332', 'Wauconda 333', 'Wauconda 334', 'Wauconda 335', 'Wauconda 336', 'Wauconda 337', 'Wauconda 338', 'Wauconda 339', 'Warren 324', 'Warren 325', 'Grant 142', 'Grant 140', 'Grant 141', 'Warren 289', 'Warren 288', 'Waukegan 379', 'Waukegan 378', 'Warren 322', 'Warren 323', 'Warren 320', 'Warren 321', 'Waukegan 373', 'Waukegan 372', 'Waukegan 371', 'Waukegan 370', 'Waukegan 377', 'Waukegan 376', 'Waukegan 375', 'Waukegan 374', 'Richmond 2', 'Richmond 3', 'Richmond 1', 'Seneca 2', 'Seneca 1', 'Mchenry 35', 'Mchenry 34', 'Mchenry 31', 'Mchenry 30', 'Mchenry 33', 'Mchenry 32', 'Richmond 4', 'Grafton 29', 'Grafton 28', 'Grafton 27', 'Grafton 26', 'Grafton 25', 'Grafton 24', 'Grafton 23', 'Grafton 22', 'Grafton 21', 'Grafton 20', 'Alden', 'Burton 2', 'Burton 3', 'Burton 1', 'Grafton 12', 'Nunda 24', 'Nunda 25', 'Nunda 26', 'Nunda 27', 'Algonquin 19', 'Algonquin 18', 'Nunda 22', 'Nunda 23', 'Algonquin 15', 'Algonquin 14', 'Algonquin 17', 'Algonquin 16', 'Algonquin 11', 'Algonquin 10', 'Algonquin 13', 'Algonquin 12', 'Coral 1', 'Coral 2', 'Coral 3', 'Grafton 13', 'Dorr 10', 'Grafton 18', 'Grafton 10', 'Algonquin 68', 'Mchenry 16', 'Mchenry 15', 'Mchenry 14', 'Mchenry 13', 'Mchenry 12', 'Mchenry 11', 'Mchenry 10', 'Algonquin 60', 'Algonquin 61', 'Algonquin 62', 'Algonquin 63', 'Algonquin 64', 'Algonquin 65', 'Algonquin 66', 'Algonquin 67', 'Grafton 11', 'Dorr 12', 'Chemung 4', 'Grafton 17', 'Nunda 7', 'Mchenry 17', 'Mchenry 27', 'Greenwood 5', 'Greenwood 4', 'Greenwood 7', 'Greenwood 6', 'Greenwood 1', 'Greenwood 3', 'Greenwood 2', 'Grafton 8', 'Grafton 9', 'Grafton 4', 'Grafton 5', 'Grafton 6', 'Grafton 7', 'Grafton 1', 'Grafton 2', 'Grafton 3', 'Mchenry 21', 'Nunda 4', 'Marengo 2', 'Marengo 3', 'Marengo 1', 'Marengo 4', 'Nunda 3', 'Mchenry 7', 'Mchenry 6', 'Mchenry 5', 'Mchenry 4', 'Mchenry 3', 'Mchenry 2', 'Mchenry 1', 'Nunda 5', 'Grafton 19', 'Mchenry 9', 'Mchenry 8', 'Algonquin 46', 'Algonquin 47', 'Algonquin 44', 'Algonquin 45', 'Algonquin 42', 'Algonquin 43', 'Algonquin 40', 'Algonquin 41', 'Nunda 6', 'Algonquin 48', 'Algonquin 49', 'Riley', 'Algonquin 1', 'Dorr 11', 'Algonquin 3', 'Algonquin 2', 'Algonquin 5', 'Algonquin 4', 'Algonquin 7', 'Algonquin 6', 'Algonquin 9', 'Algonquin 8', 'Dorr 13', 'Algonquin 51', 'Algonquin 50', 'Algonquin 53', 'Algonquin 52', 'Algonquin 55', 'Algonquin 54', 'Algonquin 57', 'Algonquin 56', 'Algonquin 59', 'Algonquin 58', 'Dorr 14', 'Hartland 2', 'Mchenry 19', 'Hartland 1', 'Mchenry 18', 'Dorr 9', 'Dorr 8', 'Dorr 5', 'Dorr 4', 'Dorr 7', 'Dorr 6', 'Dorr 1', 'Dorr 3', 'Dorr 2', 'Grafton 16', 'Chemung 5', 'Grafton 14', 'Grafton 15', 'Nunda 19', 'Chemung 1', 'Chemung 2', 'Chemung 3', 'Nunda 15', 'Nunda 14', 'Nunda 17', 'Nunda 16', 'Nunda 11', 'Nunda 10', 'Nunda 13', 'Nunda 12', 'Nunda 18', 'Dunham', 'Algonquin 24', 'Algonquin 25', 'Algonquin 26', 'Algonquin 27', 'Algonquin 20', 'Algonquin 21', 'Algonquin 22', 'Algonquin 23', 'Nunda 20', 'Algonquin 28', 'Algonquin 29', 'Nunda 21', 'Nunda 2', 'Mchenry 28', 'Mchenry 29', 'Mchenry 26', 'Nunda 28', 'Mchenry 24', 'Mchenry 25', 'Mchenry 22', 'Mchenry 23', 'Mchenry 20', 'Nunda 29', 'Algonquin 37', 'Algonquin 36', 'Algonquin 35', 'Algonquin 34', 'Algonquin 33', 'Algonquin 32', 'Algonquin 31', 'Algonquin 30', 'Nunda 9', 'Nunda 8', 'Algonquin 39', 'Algonquin 38', 'Grafton 30', 'Grafton 31', 'Nunda 1', 'Hebron 2', 'Hebron 1', 'EL0045', 'EL0003', 'EL0002', 'CA0010', 'EL0032', 'BR0002', 'GE0007', 'EL0058', 'BR0001', 'GE0002', 'GE0003', 'GE0001', 'EL0052', 'EL0053', 'EL0050', 'EL0051', 'EL0056', 'SC0016', 'EL0054', 'EL0055', 'DU0010', 'DU0011', 'DU0012', 'DU0013', 'DU0014', 'DU0015', 'DU0016', 'DU0017', 'DU0018', 'DU0019', 'EL0044', 'BA0002', 'AU0015', 'AU0014', 'AU0013', 'AU0012', 'AU0011', 'AU0010', 'AU0009', 'EL0049', 'EL0048', 'GE0017', 'GE0016', 'GE0011', 'GE0010', 'GE0013', 'GE0012', 'EL0041', 'EL0040', 'EL0043', 'EL0042', 'GE0019', 'GE0018', 'EL0047', 'EL0046', 'GE0006', 'EL0027', 'DU0009', 'DU0008', 'DU0007', 'DU0006', 'DU0005', 'DU0004', 'DU0003', 'DU0002', 'DU0001', 'BA0012', 'BA0013', 'BA0010', 'EL0059', 'BA0016', 'BA0017', 'BA0014', 'BA0015', 'BA0018', 'BA0019', 'GE0014', 'EL0026', 'HA0002', 'GE0020', 'GE0021', 'SC0012', 'SC0011', 'SC0010', 'GE0004', 'KA0001', 'SC0017', 'EL0057', 'BA0001', 'BA0003', 'BA0011', 'BA0005', 'SC0015', 'BA0007', 'BA0006', 'BA0009', 'BA0008', 'GE0009', 'SC0014', 'SC0019', 'SG0001', 'SG0002', 'SG0003', 'SG0004', 'SG0005', 'SG0006', 'GE0015', 'SC0018', 'GE0008', 'BB0002', 'BB0003', 'BB0001', 'BB0006', 'BB0004', 'BB0005', 'EL0016', 'EL0017', 'EL0014', 'EL0015', 'EL0012', 'EL0013', 'EL0010', 'EL0011', 'EL0025', 'EL0018', 'EL0019', 'EL0024', 'BU0001', 'EL0022', 'BA0004', 'SC0002', 'EL0020', 'EL0005', 'BA0021', 'BA0020', 'GE0005', 'SC0022', 'EL0004', 'EL0007', 'SC0021', 'SC0026', 'SC0027', 'SC0024', 'SC0025', 'AU0003', 'SC0028', 'SC0029', 'VI0001', 'EL0008', 'VI0002', 'EL0030', 'EL0031', 'HA0003', 'SC0020', 'HA0001', 'EL0033', 'EL0035', 'SC0013', 'PL0002', 'SC0031', 'SC0030', 'SC0033', 'SC0032', 'EL0034', 'SC0034', 'EL0036', 'EL0037', 'EL0038', 'EL0039', 'DU0034', 'DU0035', 'DU0032', 'DU0033', 'DU0030', 'DU0031', 'RU0005', 'RU0004', 'RU0007', 'RU0006', 'RU0001', 'RU0003', 'RU0002', 'EL0009', 'PL0003', 'PL0001', 'RU0009', 'RU0008', 'CA0008', 'CA0009', 'CA0006', 'CA0007', 'CA0004', 'CA0005', 'CA0002', 'CA0003', 'CA0001', 'SC0008', 'SC0009', 'EL0029', 'EL0028', 'SC0004', 'SC0005', 'SC0006', 'SC0007', 'EL0023', 'SC0001', 'EL0021', 'SC0003', 'DU0025', 'DU0024', 'DU0027', 'DU0026', 'DU0021', 'DU0020', 'DU0023', 'DU0022', 'DU0029', 'DU0028', 'AU0001', 'AU0002', 'EL0006', 'AU0004', 'AU0005', 'AU0006', 'AU0007', 'AU0008', 'EL0001', 'SC0023'];
+			var townships = ['Algonquin', 'Cuba', 'Ela', 'Wayne', 'Bloomingdale', 'Winfield', 'Milton', 'York', 'Naperville', 'Lisle', 'Downers Grove'];
+			var primary_candidates_2016_P = ['HILLARY CLINTON','BERNIE SANDERS','WILLIE L_ WILSON',"MARTIN J_ O'MALLEY",'LARRY COHEN','ROQUE ROCKY DE LA FUENTE','DAVID FORMHALS',"BRIAN O'NEILL w-in",'DONALD J_ TRUMP','TED CRUZ','JOHN R_ KASICH','MARCO RUBIO','BEN CARSON','JEB BUSH','RAND PAUL','CHRIS CHRISTIE','MIKE HUCKABEE','CARLY FIORINA','RICK SANTORUM','JOANN BREIVOGEL'];
+			var primary_candidates_2012 = ["Maureen E. Yates", "Peter J. Roskam", "Geoffrey Petzel", "Leslie Coolidge"];
+			var primary_candidates_2014 = ['Michael Mason', 'Peter J. Roskam'];
+			var primary_candidates_2016 = ["Amanda Howland", "Gordon (Jay) Kinzler","Robert Marshall", "Peter J. Roskam"];
+			var primary_candidates_2018 = ['Kelly Mazeski','Amanda Howland','Sean Casten','Jennifer Zordani','Becky Anderson Wilkins','Ryan Huffman','Carole Cheney', 'Peter J. Roskam'];
+			var colors = ["#bad3fc", "#8caa9f" , "#adc5c9", "#9da98b", "#d6cbab" , "#d6b4ab", "#c8afcc" , "#e6e894" , "#f2d19d" , "#a4def2" , "#B5A642" , "#FF007F" , "#08E8DE" , "#D19FE8" , "#004225" , "#CC0000" , "#702963" , "	#ED872D" , "#536878" , "#E30022" , "#006B3C" , "#00CC99" , "#FFEF00" , "#A3C1AD" , "#ED9121" , "#2A52BE" , "#ACE1AF" , "#36454F" , "#DFFF00" , "#DE3163", "#FFA700" , "#98817B" , "#00FF6F" , "#CD5C5C", "#7B3F00" , "#E34234" , "#D2691E" , "#FBCCE7", "#E4D00A" , "#0047AB" , "#FF3800" , "#8C92AC", "#FBEC5D" , "#FF7F50" , "#893F45" , "#654321" , "#A40000" , "#08457E" , "#008B8B"];
+			var svg;
+			var legend;
+			var primary_divs = ['2016PrimaryPresidential', '2012PrimaryCongressional', '2014PrimaryCongressional','2016PrimaryCongressional','2018PrimaryCongressional','2012PrimaryPresidential'];
+			var primary_candidates_dict = {'2016PrimaryPresidential': primary_candidates_2016_P, '2016PrimaryCongressional': primary_candidates_2016, '2014PrimaryCongressional': primary_candidates_2014, '2012PrimaryCongressional': primary_candidates_2012, '2018PrimaryCongressional': primary_candidates_2018};
+
+			function create_map(type, census_tractsP) {
+				if (typeof map != 'undefined') {
+					map.remove();
+				}
+
+				for (primary_div in primary_divs) {
+					if (type==primary_divs[primary_div]) {
+						document.getElementById(primary_divs[primary_div]).style.visibility = 'visible';
+						document.getElementById(primary_divs[primary_div]).style.height = '100px';
+						document.getElementById(primary_divs[primary_div]).style.overflow = 'scroll';
+						document.getElementById(primary_divs[primary_div]).style.clear = 'both';
+					} else {
+						document.getElementById(primary_divs[primary_div]).style.visibility = 'hidden';
+						document.getElementById(primary_divs[primary_div]).style.height = '0';
+					}
+				}
+
+				svg = d3.select("div.map")
+					.append("svg")
+					.attr("width" , map_width)
+					.attr("height" , map_height)
+					.attr("id","map");
+				var center = [0,0];
+				var scale  = 80000;
+				var offset = [map_width/2, map_height/2];
+
+				d3.json("GeoJSON files/CDLMKnoextra.json" , function(error, county_data) {
+					if (error) console.log(error);
+					center = d3.geo.centroid(county_data);
+					
+					var projection = d3.geo.mercator().scale(scale).center(center).translate(offset);
+					var path = d3.geo.path().projection(projection);
+
+					var quantize = d3.scale.quantize()
+						.domain([-50, 50])
+						.range(gradient);
+
+					var pop_quantize = d3.scale.quantize()
+						.domain([0,10])
+						.range(pop_gradient);
+
+					svg.selectAll("path")
+						.data(county_data.features)
+						.enter()
+						.append("path")
+						.attr("d", path)
+						.attr("fill", function(d) {
+							var precinct_name = "";
+							var county = "";
+							if ('idpct_txt' in d.properties) {
+								precinct_name = d.properties.idpct_txt;
+								county = 'cook';
+							} else if ('PrecinctNa' in d.properties) {
+								precinct_name = d.properties.PrecinctNa;
+								county = 'dupage';
+							} else if ('TWP_PCT' in d.properties) {
+								precinct_name = d.properties.TWP_PCT;
+								county = 'lake';
+							} else {
+								if (d.properties.PRECINCT.indexOf(" ") > -1) {
+									precinct_name = d.properties.PRECINCT; 
+									county = 'mchenry';	
+								} else {
+									precinct_name = d.properties.PRECINCT.charAt(0) + d.properties.PRECINCT.charAt(1) + "00" + d.properties.PRECINCT.charAt(2) + d.properties.PRECINCT.charAt(3);
+									var kane_precinct_name = d.properties.PRECINCT;
+									county = 'kane';
+								}
+							}
+							if (type=='blank') {
+								if (precinct_name.split(" ").length > 1) {
+									var township_name = precinct_name.split(" ");
+									township_name.pop();
+									return colors[townships.indexOf(township_name.join(" "))];
+								}
+							}
+							if (type=='languages') {
+								return pop_quantize(parseFloat(ls[precinct_name]));
+							}
+							if (type=='languagesAndVT') {
+								var ss = parseFloat(ls[precinct_name]);
+								var vote = vt[precinct_name];
+								if ((ss>10) && (vote>0.04)) { return 'green'; }
+								else if ((ss>10) && (vote<=0.04)) { return 'blue' }
+								else if ((ss<=10) && (vote>0.04)) { return 'yellow' }
+								else { return 'red' }
+							}
+							if (type=='VT') {
+								// if (county=='kane') { precinct_name = kane_precinct_name; }
+								console.log(precinct_name);
+								console.log(vt[precinct_name]);
+								return pop_quantize(vt[precinct_name]*100)
+							}
+							if ((precincts.indexOf(precinct_name) > -1) && (document.getElementById('election_dropdown').value in electiondata[county][precinct_name])) {
+								if (document.getElementById('election_dropdown').value.indexOf('Primary')>-1) {
+									var checked_candidates = primary_candidates_dict[document.getElementById('election_dropdown').value].filter(cand => document.getElementById(cand+" "+type.substring(0,4)).checked);
+									if (checked_candidates.length < 3) {
+										return quantize((parseInt(electiondata[county][precinct_name][type][checked_candidates[0]]) / (parseInt(electiondata[county][precinct_name][type][checked_candidates[0]])+parseInt(electiondata[county][precinct_name][type][checked_candidates[1]]))*100) - (parseInt(electiondata[county][precinct_name][type][checked_candidates[1]]) / (parseInt(electiondata[county][precinct_name][type][checked_candidates[0]])+parseInt(electiondata[county][precinct_name][type][checked_candidates[1]]))*100));
+									} else {
+										var max_num = 0;
+										var max_candidate = "";
+										for (i in checked_candidates) {
+											if (parseInt(electiondata[county][precinct_name][type][checked_candidates[i]]) > max_num) {
+												max_num = parseInt(electiondata[county][precinct_name][type][checked_candidates[i]]);
+												max_candidate = checked_candidates[i];
+											}
+										};
+										for (i in checked_candidates) {
+											if (checked_candidates[i]==max_candidate) { return colors[i]; }
+										};
+									};
+								} else { return quantize(electiondata[county][precinct_name][type]['Democrat'] - electiondata[county][precinct_name][type]['Republican']); }
+							} else { return "#ffffff"; }
+						})
+						.attr("stroke", "#000000")
+						.attr("stroke-width", "1")
+						.on('click', function(d) {
+							var precinct_name = "";
+							var county = "";
+							if ('idpct_txt' in d.properties) {
+								precinct_name = d.properties.idpct_txt;
+								county = 'cook';
+							} else if ('PrecinctNa' in d.properties) {
+								precinct_name = d.properties.PrecinctNa;
+								county = 'dupage';
+							} else if ('TWP_PCT' in d.properties) {
+								precinct_name = d.properties.TWP_PCT;
+								county = 'lake';
+							} else {
+								if (d.properties.PRECINCT.indexOf(" ") > -1) {
+									precinct_name = d.properties.PRECINCT; 
+									county = 'mchenry';	
+								} else {
+									precinct_name = d.properties.PRECINCT.charAt(0) + d.properties.PRECINCT.charAt(1) + "00" + d.properties.PRECINCT.charAt(2) + d.properties.PRECINCT.charAt(3);
+									county = 'kane';
+								}
+							}
+							clicked(county, precinct_name, type);
+						})
+						.append("title")
+						.text(function(d) {
+							var precinct_name = "";
+							var county = "";
+							if ('idpct_txt' in d.properties) {
+								precinct_name = d.properties.idpct_txt;
+								county = 'cook';
+							} else if ('PrecinctNa' in d.properties) {
+								precinct_name = d.properties.PrecinctNa;
+								county = 'dupage';
+							} else if ('TWP_PCT' in d.properties) {
+								precinct_name = d.properties.TWP_PCT;
+								county = 'lake';
+							} else {
+								if (d.properties.PRECINCT.indexOf(" ") > -1) {
+									precinct_name = d.properties.PRECINCT; 
+									county = 'mchenry';	
+								} else {
+									precinct_name = d.properties.PRECINCT.charAt(0) + d.properties.PRECINCT.charAt(1) + "00" + d.properties.PRECINCT.charAt(2) + d.properties.PRECINCT.charAt(3);
+									county = 'kane';
+								}
+							}
+							var title_string = county + " / " + precinct_name;
+							if ((precincts.indexOf(precinct_name) > -1) && (document.getElementById('election_dropdown').value in electiondata[county][precinct_name])) {
+								if (document.getElementById('election_dropdown').value.indexOf('Primary')>-1) {
+									var checked_candidates = primary_candidates_dict[document.getElementById('election_dropdown').value].filter(cand => document.getElementById(cand+" "+type.substring(0,4)).checked);
+									if (checked_candidates.length < 3) {
+										for (i in checked_candidates) {
+											title_string = title_string + " / " + checked_candidates[i] + ": " + electiondata[county][precinct_name][type][checked_candidates[i]];
+										};
+									} else {
+										var max_num = 0;
+										var max_candidate = "";
+										for (i in checked_candidates) {
+											if (parseInt(electiondata[county][precinct_name][type][checked_candidates[i]]) > max_num) {
+												max_num = parseInt(electiondata[county][precinct_name][type][checked_candidates[i]]);
+												max_candidate = checked_candidates[i];
+											};
+										};
+										title_string = title_string + " / " + max_candidate;
+									}
+								} else { title_string = title_string + " / Democrat: " + electiondata[county][precinct_name][type]['Democrat'] + " / Republican: " + electiondata[county][precinct_name][type]['Republican']; }
+							} 
+							return title_string;
+						});
+
+						if ((type=='blank') || (type=='languages')) {
+							svg.selectAll('.precinct-label')
+							        .data(county_data.features)
+							      .enter().append('text')
+							        .each(function(d) {
+							          d3.select(this)
+							            .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+							            .attr("fill", "black")
+							            .style("text-anchor", "middle")
+							            .style("font-size", "1.75px")
+							            .style("max-width", "10px")
+							            .text(function(d) { 
+							            	var precinct_name = "";
+							            	if ('idpct_txt' in d.properties) { precinct_name = d.properties.idpct_txt;} 
+							            	else if ('PrecinctNa' in d.properties) { precinct_name = d.properties.PrecinctNa;} 
+							            	else if ('TWP_PCT' in d.properties) { precinct_name = d.properties.TWP_PCT; } 
+							            	else {
+							            		if (d.properties.PRECINCT.indexOf(" ") > -1) { precinct_name = d.properties.PRECINCT; } 
+							            		else { precinct_name = d.properties.PRECINCT.charAt(0) + d.properties.PRECINCT.charAt(1) + "00" + d.properties.PRECINCT.charAt(2) + d.properties.PRECINCT.charAt(3); }
+							            	}
+							            	if (precinct_name.split(" ").length > 1) {
+							            		return precinct_name.split(" ").pop();
+							            	} else {
+							            		return precinct_name;
+							            	}
+							            });
+							            // .append('tspan')
+							            // .attr('x', '0')
+							            // .attr('y','0')
+							            // .text(function(d) {
+							            // 	var precinct_name = "";
+							            // 	if ('idpct_txt' in d.properties) { precinct_name = d.properties.idpct_txt;} 
+							            // 	else if ('PrecinctNa' in d.properties) { precinct_name = d.properties.PrecinctNa;} 
+							            // 	else if ('TWP_PCT' in d.properties) { precinct_name = d.properties.TWP_PCT; } 
+							            // 	else {
+							            // 		if (d.properties.PRECINCT.indexOf(" ") > -1) { precinct_name = d.properties.PRECINCT; } 
+							            // 		else { precinct_name = d.properties.PRECINCT.charAt(0) + d.properties.PRECINCT.charAt(1) + "00" + d.properties.PRECINCT.charAt(2) + d.properties.PRECINCT.charAt(3); }
+							            // 	}
+							            // 	if (precinct_name.length > 12) {
+							            // 		return precinct_name.substring(0,precinct_name.indexOf(' '));
+							            // 	}
+							            // 	return;
+							            // })
+							            // .append('tspan')
+							            // .attr('x', '0')
+							            // .attr('y','1em')
+							            // .text(function(d) {
+							            // 	var precinct_name = "";
+							            // 	if ('idpct_txt' in d.properties) { precinct_name = d.properties.idpct_txt;} 
+							            // 	else if ('PrecinctNa' in d.properties) { precinct_name = d.properties.PrecinctNa;} 
+							            // 	else if ('TWP_PCT' in d.properties) { precinct_name = d.properties.TWP_PCT; } 
+							            // 	else {
+							            // 		if (d.properties.PRECINCT.indexOf(" ") > -1) { precinct_name = d.properties.PRECINCT; } 
+							            // 		else { precinct_name = d.properties.PRECINCT.charAt(0) + d.properties.PRECINCT.charAt(1) + "00" + d.properties.PRECINCT.charAt(2) + d.properties.PRECINCT.charAt(3); }
+							            // 	}
+							            // 	if (precinct_name.length > 12) {
+							            // 		return precinct_name.substring(precinct_name.indexOf(' '));
+							            // 	}
+							            // 	return;
+							            // });
+							        });
+						}
+				});
+
+				if (census_tractsP) {
+					d3.json("census/illinois_censustracts_2016/illinois_census_tracts.json" , function(error, tracts) {
+						var projection = d3.geo.mercator().scale(scale).center(center).translate(offset);
+						var path = d3.geo.path().projection(projection);
+
+						svg.selectAll("path")
+							.data(tracts.features)
+							.enter()
+							.append("path")
+							.attr("d", path)
+							.attr("stroke", "#000000")
+							.attr("stroke-width", "1")
+							.attr("fill", "#31bf55")
+							.attr("opacity", "0.3")
+							.append("title")
+							.text(function(d) {
+								return d.properties.TRACTCE;
+							});
+					});
+				}
+				map = svg;
+			}
+
+			function clicked(c, p, type) {
+				if (typeof legend != 'undefined') {
+					legend.remove();
+				}
+				legend = svg.append("g")
+				  .attr("class", "legend");
+				var rows = [p + ", " + c + " county"];
+				if (type.indexOf('Primary') > -1){
+					for (i in primary_candidates_dict[type]) {
+						rows.push(primary_candidates_dict[type][i] + ": " + electiondata[c][p][type][primary_candidates_dict[type][i]]);
+					}
+				} else {
+					rows.push("Democrat: " + electiondata[c][p][type]['Democrat']);
+					rows.push("Republican: " + electiondata[c][p][type]['Republican']);
+				}
+				for (i in rows) {
+					legend.append('text')
+						.attr('x', 750)
+						.attr('y', 25 + (15*i))
+						.text(rows[i]);
+				}
+			}
+
+			function change_map() {
+				if (typeof map != 'undefined') {
+					map.remove();
+				}
+				create_map(document.getElementById('election_dropdown').value, false);
+
+			}
+
+			change_map();
+
+		</script>
+		<br><br><br><br><br><br><br><br><br><br><br><br>

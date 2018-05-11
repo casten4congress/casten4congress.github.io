@@ -1,0 +1,15 @@
+---
+layout: default
+title: {{ page.title }}
+---
+{{ content }}
+{% for num in (0...3) %}
+<div class="col-md-3">
+	{% for item in {{ page.datafile }} %}
+		{% assign indexloop = forloop.index | minus: 1 | modulo: 4%}
+		{% if indexloop == num %}
+			{{ page.interior }}
+		{% endif %}
+	{% endfor %}
+</div>
+{% endfor %}

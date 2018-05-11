@@ -1,0 +1,306 @@
+---
+layout: default
+title: Neighborhood Profiles
+---
+		<style type="text/css">
+			svg {
+				float: left;
+				padding-bottom: 100px;
+				margin-bottom: 100px;
+			}
+			#date {
+				text-align: right;
+				margin-right: 50px;
+			}
+			.invisible input {
+				height: 0px;
+				width: 0px;
+				display: none;
+			}
+			.invisible label {
+				color: white;
+			}
+			form {
+				font-size: 18px;
+				padding: 10px;
+			}
+			input {
+				margin: 10px;
+			}
+			#data_select {
+				overflow: scroll;
+				height: 300px;
+				width: 100%;
+			}
+			h1 {
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			h3 {
+				padding-left: 10px;
+			}
+			h5 {
+				padding-left: 10px;
+			}
+			p {
+				padding-left: 10px;
+				padding-right: 10px;
+				padding-bottom: 0px;
+				padding-top: 0px;
+				margin: 0 0 0 0;
+			}
+			li {
+				padding: 0 0 0 0;
+				margin: 0 0 0 0;
+			}
+			.lawlist {
+				width: 300px;
+				height: 600px;
+				overflow: scroll;
+			}
+			#observations {
+				clear: both;
+			}
+		</style>
+		<div id='instructions' class='jumbotron'>
+		<h1>Neighborhoods in the 6th district</h1>
+		<p>All information pulled from the <a href="https://www.census.gov/programs-surveys/acs/">American Community Survey</a>, conducted by the U.S. Census Bureau.</p>
+		</div>
+		<div id="neighborhood">
+			<b>Neighborhood:</b>
+			<select class="form-control" name="neighborhood" id="neighborhood-dropdown" onChange="change_visible_data()">
+				<option value='Algonquin village, Illinois'>Algonquin village, Illinois</option>
+				<option value='Barrington Hills village, Illinois'>Barrington Hills village, Illinois</option>
+				<option value='Barrington village, Illinois'>Barrington village, Illinois</option>
+				<option value='Bartlett village, Illinois'>Bartlett village, Illinois</option>
+				<option value='Burr Ridge village, Illinois'>Burr Ridge village, Illinois</option>
+				<option value='Carol Stream village, Illinois'>Carol Stream village, Illinois</option>
+				<option value='Carpentersville village, Illinois'>Carpentersville village, Illinois</option>
+				<option value='Cary village, Illinois'>Cary village, Illinois</option>
+				<option value='Clarendon Hills village, Illinois'>Clarendon Hills village, Illinois</option>
+				<option value='Crystal Lake city, Illinois'>Crystal Lake city, Illinois</option>
+				<option value='Darien city, Illinois'>Darien city, Illinois</option>
+				<option value='Deer Park village, Illinois'>Deer Park village, Illinois</option>
+				<option value='Downers Grove village, Illinois'>Downers Grove village, Illinois</option>
+				<option value='East Dundee village, Illinois'>East Dundee village, Illinois</option>
+				<option value='Elgin city, Illinois'>Elgin city, Illinois</option>
+				<option value='Forest Lake CDP, Illinois'>Forest Lake CDP, Illinois</option>
+				<option value='Fox River Grove village, Illinois'>Fox River Grove village, Illinois</option>
+				<option value='Gilberts village, Illinois'>Gilberts village, Illinois</option>
+				<option value='Glen Ellyn village, Illinois'>Glen Ellyn village, Illinois</option>
+				<option value='Hawthorn Woods village, Illinois'>Hawthorn Woods village, Illinois</option>
+				<option value='Hinsdale village, Illinois'>Hinsdale village, Illinois</option>
+				<option value='Hoffman Estates village, Illinois'>Hoffman Estates village, Illinois</option>
+				<option value='Inverness village, Illinois'>Inverness village, Illinois</option>
+				<option value='Kildeer village, Illinois'>Kildeer village, Illinois</option>
+				<option value='Lake Barrington village, Illinois'>Lake Barrington village, Illinois</option>
+				<option value='Lake Zurich village, Illinois'>Lake Zurich village, Illinois</option>
+				<option value='Lake in the Hills village, Illinois'>Lake in the Hills village, Illinois</option>
+				<option value='Lakewood village, Illinois'>Lakewood village, Illinois</option>
+				<option value='Lisle village, Illinois'>Lisle village, Illinois</option>
+				<option value='Lombard village, Illinois'>Lombard village, Illinois</option>
+				<option value='Long Grove village, Illinois'>Long Grove village, Illinois</option>
+				<option value='Naperville city, Illinois'>Naperville city, Illinois</option>
+				<option value='North Barrington village, Illinois'>North Barrington village, Illinois</option>
+				<option value='Oak Brook village, Illinois'>Oak Brook village, Illinois</option>
+				<option value='Oakbrook Terrace city, Illinois'>Oakbrook Terrace city, Illinois</option>
+				<option value='Oakwood Hills village, Illinois'>Oakwood Hills village, Illinois</option>
+				<option value='Palatine village, Illinois'>Palatine village, Illinois</option>
+				<option value='Port Barrington village, Illinois'>Port Barrington village, Illinois</option>
+				<option value='Rolling Meadows city, Illinois'>Rolling Meadows city, Illinois</option>
+				<option value='Sleepy Hollow village, Illinois'>Sleepy Hollow village, Illinois</option>
+				<option value='South Barrington village, Illinois'>South Barrington village, Illinois</option>
+				<option value='South Elgin village, Illinois'>South Elgin village, Illinois</option>
+				<option value='St. Charles city, Illinois'>St. Charles city, Illinois</option>
+				<option value='Tower Lakes village, Illinois'>Tower Lakes village, Illinois</option>
+				<option value='Trout Valley village, Illinois'>Trout Valley village, Illinois</option>
+				<option value='Warrenville city, Illinois'>Warrenville city, Illinois</option>
+				<option value='Wayne village, Illinois'>Wayne village, Illinois</option>
+				<option value='West Chicago city, Illinois'>West Chicago city, Illinois</option>
+				<option value='West Dundee village, Illinois'>West Dundee village, Illinois</option>
+				<option value='Westmont village, Illinois'>Westmont village, Illinois</option>
+				<option value='Wheaton city, Illinois'>Wheaton city, Illinois</option>
+				<option value='Willowbrook CDP, Illinois'>Willowbrook CDP, Illinois</option>
+				<option value='Willowbrook village, Illinois'>Willowbrook village, Illinois</option>
+				<option value='Winfield village, Illinois'>Winfield village, Illinois</option>
+			</select>
+		</div>
+		<div id="data_select">
+			<b>Data: </b><br>
+			<input class='form-check-input' type='checkbox' id="Percent; CLASS OF WORKER - Government workers" onClick='change_visible_data()'><label class='form-check-label' for="Percent; CLASS OF WORKER - Government workers">Percent; CLASS OF WORKER - Government workers</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; CLASS OF WORKER - Private wage and salary workers" onClick='change_visible_data()'><label class='form-check-label' for="Percent; CLASS OF WORKER - Private wage and salary workers">Percent; CLASS OF WORKER - Private wage and salary workers</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; CLASS OF WORKER - Self-employed in own not incorporated business workers" onClick='change_visible_data()'><label class='form-check-label' for="Percent; CLASS OF WORKER - Self-employed in own not incorporated business workers">Percent; CLASS OF WORKER - Self-employed in own not incorporated business workers</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; CLASS OF WORKER - Unpaid family workers" onClick='change_visible_data()'><label class='form-check-label' for="Percent; CLASS OF WORKER - Unpaid family workers">Percent; CLASS OF WORKER - Unpaid family workers</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; EDUCATIONAL ATTAINMENT - 9th to 12th grade, no diploma" onClick='change_visible_data()'><label class='form-check-label' for="Percent; EDUCATIONAL ATTAINMENT - 9th to 12th grade, no diploma">Percent; EDUCATIONAL ATTAINMENT - 9th to 12th grade, no diploma</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; EDUCATIONAL ATTAINMENT - Associate's degree" onClick='change_visible_data()'><label class='form-check-label' for="Percent; EDUCATIONAL ATTAINMENT - Associate's degree">Percent; EDUCATIONAL ATTAINMENT - Associate's degree</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; EDUCATIONAL ATTAINMENT - Bachelor's degree" onClick='change_visible_data()'><label class='form-check-label' for="Percent; EDUCATIONAL ATTAINMENT - Bachelor's degree">Percent; EDUCATIONAL ATTAINMENT - Bachelor's degree</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; EDUCATIONAL ATTAINMENT - Graduate or professional degree" onClick='change_visible_data()'><label class='form-check-label' for="Percent; EDUCATIONAL ATTAINMENT - Graduate or professional degree">Percent; EDUCATIONAL ATTAINMENT - Graduate or professional degree</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; EDUCATIONAL ATTAINMENT - High school graduate (includes equivalency)" onClick='change_visible_data()'><label class='form-check-label' for="Percent; EDUCATIONAL ATTAINMENT - High school graduate (includes equivalency)">Percent; EDUCATIONAL ATTAINMENT - High school graduate (includes equivalency)</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; EDUCATIONAL ATTAINMENT - Less than 9th grade" onClick='change_visible_data()'><label class='form-check-label' for="Percent; EDUCATIONAL ATTAINMENT - Less than 9th grade">Percent; EDUCATIONAL ATTAINMENT - Less than 9th grade</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; EDUCATIONAL ATTAINMENT - Some college, no degree" onClick='change_visible_data()'><label class='form-check-label' for="Percent; EDUCATIONAL ATTAINMENT - Some college, no degree">Percent; EDUCATIONAL ATTAINMENT - Some college, no degree</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; EMPLOYMENT STATUS - Percent Unemployed" onClick='change_visible_data()'><label class='form-check-label' for="Percent; EMPLOYMENT STATUS - Percent Unemployed">Percent; EMPLOYMENT STATUS - Percent Unemployed</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; HISPANIC OR LATINO AND RACE - Hispanic or Latino (of any race)" onClick='change_visible_data()'><label class='form-check-label' for="Percent; HISPANIC OR LATINO AND RACE - Hispanic or Latino (of any race)">Percent; HISPANIC OR LATINO AND RACE - Hispanic or Latino (of any race)</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; HISPANIC OR LATINO AND RACE - Hispanic or Latino (of any race) - Cuban" onClick='change_visible_data()'><label class='form-check-label' for="Percent; HISPANIC OR LATINO AND RACE - Hispanic or Latino (of any race) - Cuban">Percent; HISPANIC OR LATINO AND RACE - Hispanic or Latino (of any race) - Cuban</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; HISPANIC OR LATINO AND RACE - Hispanic or Latino (of any race) - Mexican" onClick='change_visible_data()'><label class='form-check-label' for="Percent; HISPANIC OR LATINO AND RACE - Hispanic or Latino (of any race) - Mexican">Percent; HISPANIC OR LATINO AND RACE - Hispanic or Latino (of any race) - Mexican</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; HISPANIC OR LATINO AND RACE - Hispanic or Latino (of any race) - Puerto Rican" onClick='change_visible_data()'><label class='form-check-label' for="Percent; HISPANIC OR LATINO AND RACE - Hispanic or Latino (of any race) - Puerto Rican">Percent; HISPANIC OR LATINO AND RACE - Hispanic or Latino (of any race) - Puerto Rican</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; HOUSEHOLDS BY TYPE - Family households (families) - Female householder, no husband present, family" onClick='change_visible_data()'><label class='form-check-label' for="Percent; HOUSEHOLDS BY TYPE - Family households (families) - Female householder, no husband present, family">Percent; HOUSEHOLDS BY TYPE - Family households (families) - Female householder, no husband present, family</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; HOUSEHOLDS BY TYPE - Family households (families) - Female householder, no husband present, family - With own children under 18 years" onClick='change_visible_data()'><label class='form-check-label' for="Percent; HOUSEHOLDS BY TYPE - Family households (families) - Female householder, no husband present, family - With own children under 18 years">Percent; HOUSEHOLDS BY TYPE - Family households (families) - Female householder, no husband present, family - With own children under 18 years</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; HOUSEHOLDS BY TYPE - Family households (families) - Male householder, no wife present, family" onClick='change_visible_data()'><label class='form-check-label' for="Percent; HOUSEHOLDS BY TYPE - Family households (families) - Male householder, no wife present, family">Percent; HOUSEHOLDS BY TYPE - Family households (families) - Male householder, no wife present, family</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; HOUSEHOLDS BY TYPE - Family households (families) - Male householder, no wife present, family - With own children under 18 years" onClick='change_visible_data()'><label class='form-check-label' for="Percent; HOUSEHOLDS BY TYPE - Family households (families) - Male householder, no wife present, family - With own children under 18 years">Percent; HOUSEHOLDS BY TYPE - Family households (families) - Male householder, no wife present, family - With own children under 18 years</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; HOUSEHOLDS BY TYPE - Family households (families) - Married-couple family" onClick='change_visible_data()'><label class='form-check-label' for="Percent; HOUSEHOLDS BY TYPE - Family households (families) - Married-couple family">Percent; HOUSEHOLDS BY TYPE - Family households (families) - Married-couple family</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; HOUSEHOLDS BY TYPE - Family households (families) - Married-couple family - With own children under 18 years" onClick='change_visible_data()'><label class='form-check-label' for="Percent; HOUSEHOLDS BY TYPE - Family households (families) - Married-couple family - With own children under 18 years">Percent; HOUSEHOLDS BY TYPE - Family households (families) - Married-couple family - With own children under 18 years</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; HOUSEHOLDS BY TYPE - Family households (families) - With own children under 18 years" onClick='change_visible_data()'><label class='form-check-label' for="Percent; HOUSEHOLDS BY TYPE - Family households (families) - With own children under 18 years">Percent; HOUSEHOLDS BY TYPE - Family households (families) - With own children under 18 years</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; HOUSEHOLDS BY TYPE - Nonfamily households - Householder living alone" onClick='change_visible_data()'><label class='form-check-label' for="Percent; HOUSEHOLDS BY TYPE - Nonfamily households - Householder living alone">Percent; HOUSEHOLDS BY TYPE - Nonfamily households - Householder living alone</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $10,000 to $14,999" onClick='change_visible_data()'><label class='form-check-label' for="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $10,000 to $14,999">Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $10,000 to $14,999</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $100,000 to $149,999" onClick='change_visible_data()'><label class='form-check-label' for="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $100,000 to $149,999">Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $100,000 to $149,999</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $15,000 to $24,999" onClick='change_visible_data()'><label class='form-check-label' for="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $15,000 to $24,999">Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $15,000 to $24,999</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $150,000 to $199,999" onClick='change_visible_data()'><label class='form-check-label' for="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $150,000 to $199,999">Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $150,000 to $199,999</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $200,000 or more" onClick='change_visible_data()'><label class='form-check-label' for="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $200,000 or more">Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $200,000 or more</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $25,000 to $34,999" onClick='change_visible_data()'><label class='form-check-label' for="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $25,000 to $34,999">Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $25,000 to $34,999</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $35,000 to $49,999" onClick='change_visible_data()'><label class='form-check-label' for="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $35,000 to $49,999">Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $35,000 to $49,999</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $50,000 to $74,999" onClick='change_visible_data()'><label class='form-check-label' for="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $50,000 to $74,999">Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $50,000 to $74,999</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $75,000 to $99,999" onClick='change_visible_data()'><label class='form-check-label' for="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $75,000 to $99,999">Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $75,000 to $99,999</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - Less than $10,000" onClick='change_visible_data()'><label class='form-check-label' for="Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - Less than $10,000">Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - Less than $10,000</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; LANGUAGE SPOKEN AT HOME - Language other than English - Spanish" onClick='change_visible_data()'><label class='form-check-label' for="Percent; LANGUAGE SPOKEN AT HOME - Language other than English - Spanish">Percent; LANGUAGE SPOKEN AT HOME - Language other than English - Spanish</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; OCCUPATION - Management, business, science, and arts occupations" onClick='change_visible_data()'><label class='form-check-label' for="Percent; OCCUPATION - Management, business, science, and arts occupations">Percent; OCCUPATION - Management, business, science, and arts occupations</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; OCCUPATION - Natural resources, construction, and maintenance occupations" onClick='change_visible_data()'><label class='form-check-label' for="Percent; OCCUPATION - Natural resources, construction, and maintenance occupations">Percent; OCCUPATION - Natural resources, construction, and maintenance occupations</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; OCCUPATION - Production, transportation, and material moving occupations" onClick='change_visible_data()'><label class='form-check-label' for="Percent; OCCUPATION - Production, transportation, and material moving occupations">Percent; OCCUPATION - Production, transportation, and material moving occupations</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; OCCUPATION - Sales and office occupations" onClick='change_visible_data()'><label class='form-check-label' for="Percent; OCCUPATION - Sales and office occupations">Percent; OCCUPATION - Sales and office occupations</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; OCCUPATION - Service occupations" onClick='change_visible_data()'><label class='form-check-label' for="Percent; OCCUPATION - Service occupations">Percent; OCCUPATION - Service occupations</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; RACE - American Indian and Alaska Native" onClick='change_visible_data()'><label class='form-check-label' for="Percent; RACE - American Indian and Alaska Native">Percent; RACE - American Indian and Alaska Native</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; RACE - Asian" onClick='change_visible_data()'><label class='form-check-label' for="Percent; RACE - Asian">Percent; RACE - Asian</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; RACE - Black or African American" onClick='change_visible_data()'><label class='form-check-label' for="Percent; RACE - Black or African American">Percent; RACE - Black or African American</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; RACE - Native Hawaiian and Other Pacific Islander" onClick='change_visible_data()'><label class='form-check-label' for="Percent; RACE - Native Hawaiian and Other Pacific Islander">Percent; RACE - Native Hawaiian and Other Pacific Islander</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; RACE - Some other race" onClick='change_visible_data()'><label class='form-check-label' for="Percent; RACE - Some other race">Percent; RACE - Some other race</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; RACE - White" onClick='change_visible_data()'><label class='form-check-label' for="Percent; RACE - White">Percent; RACE - White</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; SEX AND AGE - 20 to 24 years" onClick='change_visible_data()'><label class='form-check-label' for="Percent; SEX AND AGE - 20 to 24 years">Percent; SEX AND AGE - 20 to 24 years</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; SEX AND AGE - 25 to 34 years" onClick='change_visible_data()'><label class='form-check-label' for="Percent; SEX AND AGE - 25 to 34 years">Percent; SEX AND AGE - 25 to 34 years</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; SEX AND AGE - 35 to 44 years" onClick='change_visible_data()'><label class='form-check-label' for="Percent; SEX AND AGE - 35 to 44 years">Percent; SEX AND AGE - 35 to 44 years</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; SEX AND AGE - 45 to 54 years" onClick='change_visible_data()'><label class='form-check-label' for="Percent; SEX AND AGE - 45 to 54 years">Percent; SEX AND AGE - 45 to 54 years</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; SEX AND AGE - 55 to 59 years" onClick='change_visible_data()'><label class='form-check-label' for="Percent; SEX AND AGE - 55 to 59 years">Percent; SEX AND AGE - 55 to 59 years</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; SEX AND AGE - 60 to 64 years" onClick='change_visible_data()'><label class='form-check-label' for="Percent; SEX AND AGE - 60 to 64 years">Percent; SEX AND AGE - 60 to 64 years</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; SEX AND AGE - 65 to 74 years" onClick='change_visible_data()'><label class='form-check-label' for="Percent; SEX AND AGE - 65 to 74 years">Percent; SEX AND AGE - 65 to 74 years</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; SEX AND AGE - 75 to 84 years" onClick='change_visible_data()'><label class='form-check-label' for="Percent; SEX AND AGE - 75 to 84 years">Percent; SEX AND AGE - 75 to 84 years</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; SEX AND AGE - 85 years and over" onClick='change_visible_data()'><label class='form-check-label' for="Percent; SEX AND AGE - 85 years and over">Percent; SEX AND AGE - 85 years and over</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; SEX AND AGE - Female" onClick='change_visible_data()'><label class='form-check-label' for="Percent; SEX AND AGE - Female">Percent; SEX AND AGE - Female</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; SEX AND AGE - Male" onClick='change_visible_data()'><label class='form-check-label' for="Percent; SEX AND AGE - Male">Percent; SEX AND AGE - Male</label><br>
+			<input class='form-check-input' type='checkbox' id="Percent; VETERAN STATUS - Civilian veterans" onClick='change_visible_data()'><label class='form-check-label' for="Percent; VETERAN STATUS - Civilian veterans">Percent; VETERAN STATUS - Civilian veterans</label><br>
+		</div>
+		<div class="chart"></div>
+		<br>
+		<br>
+		<script type="text/javascript" src="data.js"></script>
+		<script type="text/javascript">
+			var line_colors = ["#E32636", "#5D8AA8" , "#8DB600	", "#FF9966", "#FFBF00" , "#4B5320", "#007FFF" , "#DE5D83" , "#FFD12A" , "#98777B" , "#B5A642" , "#FF007F" , "#08E8DE" , "#D19FE8" , "#004225" , "#CC0000" , "#702963" , "	#ED872D" , "#536878" , "#E30022" , "#006B3C" , "#00CC99" , "#FFEF00" , "#A3C1AD" , "#ED9121" , "#2A52BE" , "#ACE1AF" , "#36454F" , "#DFFF00" , "#DE3163", "#FFA700" , "#98817B" , "#00FF6F" , "#CD5C5C", "#7B3F00" , "#E34234" , "#D2691E" , "#FBCCE7", "#E4D00A" , "#0047AB" , "#FF3800" , "#8C92AC", "#FBEC5D" , "#FF7F50" , "#893F45" , "#654321" , "#A40000" , "#08457E" , "#008B8B"];
+			var chart_width = 1000;
+			var chart_height = 600;
+			var chart;
+			var visible_data = [];
+			var max_val = 0;
+
+			function check_graph() {
+				var margin = {
+					top: 20, 
+					right: 200,
+					bottom: 20,
+					left: 50
+				};
+
+				if (typeof chart != 'undefined') {
+					console.log('REMOVING CHART');
+					chart.remove();
+				}
+
+				console.log(visible_data);
+				if (visible_data.length > 0) {
+					chart = d3.select("div.chart")
+						.append("svg")
+						.attr("width" , 1500)
+						.attr("height" , chart_height)
+						.attr("id","chart");
+
+					var legend = chart.append("g")
+					  .attr("class", "legend")
+					  .attr("x", 850)
+					  .attr("y", 25)
+					  .attr("height", 100)
+					  .attr("width", 600);
+
+					console.log('max val in check graph', max_val);
+					var xScale = d3.scale.linear().range([margin.left, chart_width - margin.right]).domain([2010, 2016]);
+					var yScale = d3.scale.linear().range([chart_height - margin.top, margin.bottom]).domain([0, max_val]);
+					var lineGen = d3.svg.line()
+						.x(function(d, i) {
+							return xScale(d.year);
+						})
+						.y(function(d) {
+							return yScale(d.val);
+						});
+
+					var xAxis = d3.svg.axis().scale(xScale).tickFormat(d3.format("04d"));
+					var yAxis = d3.svg.axis().scale(yScale).orient('left');
+					chart.append("svg:g")
+						.attr('transform', 'translate(0,' + (chart_height - margin.bottom) + ')')
+						.call(xAxis);
+					chart.append("svg:g")
+						.attr('transform', 'translate(' + margin.left + ',0)')
+						.call(yAxis);
+
+					for (i = 0; i < visible_data.length; i++) {
+						console.log("DRAWING LINE");
+						chart.append("svb:path") 
+							.attr('d', lineGen(visible_data[i].values))
+							.attr('stroke', line_colors[i])
+							.attr('stroke-width', 2)
+							.attr('fill', 'none');
+						legend.append('rect')
+							.attr('x' , 850 + (((i - (i % 25)) / 25) * 100))
+							.attr('y' , 25 + ((i % 25) * 15))
+							.attr('width', 10)
+							.attr('height', 10)
+							.style('fill', line_colors[i]);
+						legend.append('text')
+							.attr('x', 850 + (((i - (i % 25)) / 25) * 100) + 15)
+							.attr('y', 25 + ((i % 25) * 15) + 10)
+							.text(visible_data[i]['key']);
+					}
+				} 			
+			}
+
+			function max_of_list(list) {
+				console.log('in max_of_list');
+				console.log(list);
+				var maximum_value = 0;
+				for (i = 0; i < list.length; i++) {
+					console.log(list[i]['val']);
+					maximum_value = list[i]['val'] > maximum_value ? list[i]['val'] : maximum_value;
+				}
+				console.log('maximum value',maximum_value);
+				return maximum_value;
+			}
+
+			function change_visible_data() {
+				console.log('in change_visible_data');
+				max_val = 0;
+				visible_data = [];
+
+				var question_variables = ['Percent; CLASS OF WORKER - Government workers', 'Percent; CLASS OF WORKER - Private wage and salary workers', 'Percent; CLASS OF WORKER - Self-employed in own not incorporated business workers', 'Percent; CLASS OF WORKER - Unpaid family workers', 'Percent; EDUCATIONAL ATTAINMENT - 9th to 12th grade, no diploma', "Percent; EDUCATIONAL ATTAINMENT - Associate's degree", "Percent; EDUCATIONAL ATTAINMENT - Bachelor's degree", 'Percent; EDUCATIONAL ATTAINMENT - Graduate or professional degree', 'Percent; EDUCATIONAL ATTAINMENT - High school graduate (includes equivalency)', 'Percent; EDUCATIONAL ATTAINMENT - Less than 9th grade', 'Percent; EDUCATIONAL ATTAINMENT - Some college, no degree', 'Percent; EMPLOYMENT STATUS - Percent Unemployed', 'Percent; HISPANIC OR LATINO AND RACE - Hispanic or Latino (of any race)', 'Percent; HISPANIC OR LATINO AND RACE - Hispanic or Latino (of any race) - Cuban', 'Percent; HISPANIC OR LATINO AND RACE - Hispanic or Latino (of any race) - Mexican', 'Percent; HISPANIC OR LATINO AND RACE - Hispanic or Latino (of any race) - Puerto Rican', 'Percent; HOUSEHOLDS BY TYPE - Family households (families) - Female householder, no husband present, family', 'Percent; HOUSEHOLDS BY TYPE - Family households (families) - Female householder, no husband present, family - With own children under 18 years', 'Percent; HOUSEHOLDS BY TYPE - Family households (families) - Male householder, no wife present, family', 'Percent; HOUSEHOLDS BY TYPE - Family households (families) - Male householder, no wife present, family - With own children under 18 years', 'Percent; HOUSEHOLDS BY TYPE - Family households (families) - Married-couple family', 'Percent; HOUSEHOLDS BY TYPE - Family households (families) - Married-couple family - With own children under 18 years', 'Percent; HOUSEHOLDS BY TYPE - Family households (families) - With own children under 18 years', 'Percent; HOUSEHOLDS BY TYPE - Nonfamily households - Householder living alone', 'Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $10,000 to $14,999', 'Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $100,000 to $149,999', 'Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $15,000 to $24,999', 'Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $150,000 to $199,999', 'Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $200,000 or more', 'Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $25,000 to $34,999', 'Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $35,000 to $49,999', 'Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $50,000 to $74,999', 'Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - $75,000 to $99,999', 'Percent; INCOME AND BENEFITS (IN 2010 INFLATION-ADJUSTED DOLLARS) - Less than $10,000', 'Percent; LANGUAGE SPOKEN AT HOME - Language other than English - Spanish', 'Percent; OCCUPATION - Management, business, science, and arts occupations', 'Percent; OCCUPATION - Natural resources, construction, and maintenance occupations', 'Percent; OCCUPATION - Production, transportation, and material moving occupations', 'Percent; OCCUPATION - Sales and office occupations', 'Percent; OCCUPATION - Service occupations', 'Percent; RACE - American Indian and Alaska Native', 'Percent; RACE - Asian', 'Percent; RACE - Black or African American', 'Percent; RACE - Native Hawaiian and Other Pacific Islander', 'Percent; RACE - Some other race', 'Percent; RACE - White', 'Percent; SEX AND AGE - 20 to 24 years', 'Percent; SEX AND AGE - 25 to 34 years', 'Percent; SEX AND AGE - 35 to 44 years', 'Percent; SEX AND AGE - 45 to 54 years', 'Percent; SEX AND AGE - 55 to 59 years', 'Percent; SEX AND AGE - 60 to 64 years', 'Percent; SEX AND AGE - 65 to 74 years', 'Percent; SEX AND AGE - 75 to 84 years', 'Percent; SEX AND AGE - 85 years and over', 'Percent; SEX AND AGE - Female', 'Percent; SEX AND AGE - Male', 'Percent; VETERAN STATUS - Civilian veterans'];
+
+				var place = document.getElementById('neighborhood-dropdown').value;
+
+				for (i in question_variables) {
+					if (document.getElementById(question_variables[i]).checked) {
+						var this_data = data[place][question_variables[i]];
+						console.log(this_data);
+						visible_data.push({'key': question_variables[i], 'values':this_data});
+						max_of_this_list = max_of_list(this_data);
+						max_val = max_of_this_list > max_val ? max_of_this_list : max_val;
+					}
+				}
+			    check_graph();
+			}
+
+			
+			console.log(data);
+		</script>
+		<br><br><br><br><br><br><br><br><br><br><br><br>

@@ -1,0 +1,257 @@
+---
+layout: default
+title: Performance Dashboard
+---
+		<style type="text/css">
+			svg {
+				float: left;
+				padding-bottom: 100px;
+				margin-bottom: 100px;
+			}
+			#date {
+				text-align: right;
+				margin-right: 50px;
+			}
+			.invisible input {
+				height: 0px;
+				width: 0px;
+				display: none;
+			}
+			.invisible label {
+				color: white;
+			}
+			form {
+				font-size: 18px;
+				padding: 10px;
+			}
+			input[type='radio'] {
+				margin: 10px;
+			}
+			h1 {
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			h3 {
+				padding-left: 10px;
+			}
+			h5 {
+				padding-left: 10px;
+			}
+			p {
+				padding-left: 10px;
+				padding-right: 10px;
+				padding-bottom: 0px;
+				padding-top: 0px;
+				margin: 0 0 0 0;
+			}
+			li {
+				padding: 0 0 0 0;
+				margin: 0 0 0 0;
+			}
+			#observations {
+				clear: both;
+			}
+		</style>
+		<div id='instructions' class='jumbotron'>
+			<h1>Performance metrics by municipality</h1>
+		</div>
+		<div id="data_type">
+			<b>Real-time Data:</b>
+			<select class="form-control" name='real-time_data' id='real-time_dropdown' onChange='change_map()'>
+				<!-- <option value='facebook'>Facebook</option> -->
+				<option selected value='none'>None</option>
+				<option value='website'>Website</option>
+				<!-- <option value='donations'>Donations (NGP)</option> -->
+			</select>
+			<b>Subset:</b>
+			<select class="form-control" name='subset_data' id='subset_dropdown' onChange='change_map()'>
+				<option selected value="Estimate; SEX AND AGE - Total population">None</option>
+				<option disabled>Gender</option>
+				<option value='Percent; SEX AND AGE - Male'>Male</option>
+				<option value='Percent; SEX AND AGE - Female'>Female</option>
+				<!-- <option disabled>Race/Ethnicity</option>
+				<option value='white'>White</option>
+				<option value='black'>Black</option>
+				<option value='asian'>Asian</option>
+				<option value='hispanic'>Hispanic</option>
+				<option disabled>Educational Attainment</option>
+				<option value='<9'>Less than 9th grade</option>
+				<option value='9-12'>9th to 12th grade, no diploma</option>
+				<option value='somecollege'>Some college, no degree</option>
+				<option value='AD'>Associate's degree</option>
+				<option value='BD'>Bachelor's degree</option>
+				<option value='GD'>Graduate or professional degree</option> -->
+				<option disabled>Age</option>
+				<option value='Percent; SEX AND AGE - 20 to 24 years'>20-24</option>
+				<option value='Percent; SEX AND AGE - 25 to 34 years'>25-34</option>
+				<option value='Percent; SEX AND AGE - 35 to 44 years'>35-44</option>
+				<option value='Percent; SEX AND AGE - 45 to 54 years'>45-54</option>
+				<option value='Percent; SEX AND AGE - 55 to 59 years'>55-59</option>
+				<option value='Percent; SEX AND AGE - 60 to 64 years'>60-64</option>
+				<option value='Percent; SEX AND AGE - 65 to 74 years'>65-74</option>
+				<option value='Percent; SEX AND AGE - 75 to 84 years'>75-84</option>
+				<option value='Percent; SEX AND AGE - 85 years and over'>85+</option>
+			</select>
+			<b>Date range:</b>
+			<select class='form-control' name='date_range' id='date_dropdown' onchange="change_map()">
+				<option selected value="1mo">Past Month</option>
+				<option value='3mo'>Past Three Months</option>
+				<option value='1yr'>Past Year</option>
+			</select>
+		</div>
+		<div class="map"></div>
+		<div class='table'>
+			<table class='table'>
+			</table>
+		</div>
+		<script type="text/javascript" src="data/demo/data.js"></script>
+		<script type="text/javascript" src="data/poll.js"></script>
+		<script type="text/javascript" src="data/GA/LA.js"></script>
+		<script type="text/javascript" src="data/GA/LG.js"></script>
+		<script type="text/javascript" src="data/GA/L.js"></script>
+		<script type="text/javascript">
+			var pop_gradient = ["#FFFFFF", "#eaf8f1", "#d5f1e3", "#c1ead5", "#ace3c7", "#97dcba", "#83d5ac", "#6ece9e", "#59C790", "#45c183"];
+			var perf_gradient = ['#EB7E00', '#EF9733', '#F3B166', '#F7CB99', '#FBE5CC', '#FFFFFF', '#D0EFE0', '#A2E0C1', '#73D0A2', '#45C183'];
+			var map_width = 1000;
+			var map_height = 1600;
+			var map;
+			var table;
+			var colors = ["#bad3fc", "#8caa9f" , "#adc5c9", "#9da98b", "#d6cbab" , "#d6b4ab", "#c8afcc" , "#e6e894" , "#f2d19d" , "#a4def2" , "#B5A642" , "#FF007F" , "#08E8DE" , "#D19FE8" , "#004225" , "#CC0000" , "#702963" , "	#ED872D" , "#536878" , "#E30022" , "#006B3C" , "#00CC99" , "#FFEF00" , "#A3C1AD" , "#ED9121" , "#2A52BE" , "#ACE1AF" , "#36454F" , "#DFFF00" , "#DE3163", "#FFA700" , "#98817B" , "#00FF6F" , "#CD5C5C", "#7B3F00" , "#E34234" , "#D2691E" , "#FBCCE7", "#E4D00A" , "#0047AB" , "#FF3800" , "#8C92AC", "#FBEC5D" , "#FF7F50" , "#893F45" , "#654321" , "#A40000" , "#08457E" , "#008B8B"];
+			var age_map = {'Percent; SEX AND AGE - 20 to 24 years': '18-24', 'Percent; SEX AND AGE - 25 to 34 years': '25-34', 'Percent; SEX AND AGE - 35 to 44 years': '35-44', 'Percent; SEX AND AGE - 45 to 54 years': '45-54','Percent; SEX AND AGE - 55 to 59 years': '55-64', 'Percent; SEX AND AGE - 60 to 64 years': '55-64', 'Percent; SEX AND AGE - 65 to 74 years': '65+', 'Percent; SEX AND AGE - 75 to 84 years': '65+', 'Percent; SEX AND AGE - 85 years and over': '65+'};
+			var svg;
+			var legend;
+
+			function create_map(type) {
+				if (typeof map != 'undefined') {
+					map.remove();
+				}
+
+				svg = d3.select("div.map")
+					.append("svg")
+					.attr("width" , map_width)
+					.attr("height" , map_height)
+					.attr("id","map");
+				var center = [0,0];
+				var scale  = 80000;
+				var offset = [map_width/2, map_height/2];
+
+				d3.json("IL_municipalities/municipalities.json" , function(error, county_data) {
+					if (error) console.log(error);
+					center = d3.geo.centroid(county_data);
+					
+					var projection = d3.geo.mercator().scale(scale).center(center).translate(offset);
+					var path = d3.geo.path().projection(projection);
+
+					var min = 0;
+					var max = 0;
+					var color_range = [];
+					if (document.getElementById('real-time_dropdown').value=='none') {
+						min = 0;
+						color_range = pop_gradient;
+						max = 0.06;
+					} else {
+						color_range = perf_gradient;
+						min = 0;
+						max = 1;
+					}
+					var quantize = d3.scale.quantize().domain([min, max]).range(color_range);
+
+					svg.selectAll("path")
+						.data(county_data.features)
+						.enter()
+						.append("path")
+						.attr("d", path)
+						.attr("fill", function(d) {
+							var mun_name = d.properties.NAME;
+							if (document.getElementById('real-time_dropdown').value=='none'){
+								return quantize(data[mun_name][document.getElementById('subset_dropdown').value]);
+							} else {
+								var expected = data[mun_name][document.getElementById('subset_dropdown').value];
+								var actual = 0; 
+								if (document.getElementById('subset_dropdown').value.includes('Total')) {
+									actual = l[document.getElementById('date_dropdown').value][mun_name];
+								} else if (document.getElementById('subset_dropdown').value=='Percent; SEX AND AGE - Male') {
+									actual = lg[document.getElementById('date_dropdown').value][mun_name]['male'];
+								} else if (document.getElementById('subset_dropdown').value=='Percent; SEX AND AGE - Female') {
+									actual = lg[document.getElementById('date_dropdown').value][mun_name]['female'];
+								} else {
+									actual = la[document.getElementById('date_dropdown').value][mun_name][age_map[document.getElementById('subset_dropdown').value]];
+								}
+								return quantize(actual/expected);
+							}
+							return "#4286f4"
+						})
+						.attr("stroke", "#000000")
+						.attr("stroke-width", "1");
+
+							svg.selectAll('.mun-label')
+							        .data(county_data.features)
+							      .enter().append('text')
+							        .each(function(d) {
+							          d3.select(this)
+							            .attr("transform", function(d) { return "translate(" + path.centroid(d) + ")"; })
+							            .attr("fill", "black")
+							            .style("text-anchor", "middle")
+							            .style("font-size", "5px")
+							            .style("max-width", "10px")
+							            .text(function(d) { 
+							            	return d.properties.NAME;
+							            });
+							        });
+					if (typeof table != 'undefined') {
+						table.remove();
+					}
+					table = d3.select('div.table').append('table').attr('class', 'table');
+					var thead = table.append('thead');
+					thead.append('th').attr('scope','col').text('Municipality name');
+					thead.append('th').attr('scope','col').text('Performance');
+
+					table.append('tbody').attr('id', 'tb');
+
+					var rows = d3.select('tbody#tb').selectAll('tr')
+						.data(county_data.features)
+						.enter()
+						.append('tr');
+
+					rows.append('td')
+						.text(function(d) {
+							return d.properties.NAME;
+						});
+					rows.append('td')
+						.text(function(d) {
+							var mun_name = d.properties.NAME;
+							if (document.getElementById('real-time_dropdown').value=='none'){
+								return data[mun_name][document.getElementById('subset_dropdown').value];
+							} else {
+								var expected = data[mun_name][document.getElementById('subset_dropdown').value]*poll[document.getElementById('subset_dropdown').value];
+								var actual = 0; 
+								if (document.getElementById('subset_dropdown').value.includes('Total')) {
+									actual = l[document.getElementById('date_dropdown').value][mun_name];
+								} else if (document.getElementById('subset_dropdown').value=='Percent; SEX AND AGE - Male') {
+									actual = lg[document.getElementById('date_dropdown').value][mun_name]['male'];
+								} else if (document.getElementById('subset_dropdown').value=='Percent; SEX AND AGE - Female') {
+									actual = lg[document.getElementById('date_dropdown').value][mun_name]['female'];
+								} else {
+									actual = la[document.getElementById('date_dropdown').value][mun_name][age_map[document.getElementById('subset_dropdown').value]];
+								}
+								console.log(mun_name);
+								console.log(actual/expected);
+								return (actual/expected);
+							}
+						});
+				});
+				map = svg;
+			}
+
+			function change_map() {
+				if (typeof map != 'undefined') {
+					map.remove();
+				}
+				create_map('');
+
+			}
+
+			change_map();
+
+		</script>
+		<br><br><br><br><br><br><br><br><br><br><br><br>
