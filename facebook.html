@@ -110,6 +110,18 @@ title: Neighborhood Profiles
 			var svg_one;
 			var d;
 
+			function max_of_list(list) {
+				console.log(list);
+				var k = Object.keys(list);
+				console.log(k);
+				var maximum_value = 0;
+				for (i = 0; i < k.length; i++) {
+					maximum_value = list[k[i]][0] > maximum_value ? list[k[i]][0] : maximum_value;
+				}
+				console.log(maximum_value);
+				return maximum_value;
+			}
+
 			function change_chart() {
 				var margin = {
 					top: 20, 
@@ -141,8 +153,8 @@ title: Neighborhood Profiles
 				d = svg_one.selectAll("rect")
 							.data(keys)
 							.enter();
-
-				for (var i = 0; i < 5; i++) {
+				var max_i = (max_of_list(visible_data) / 100) + 1;
+				for (var i = 0; i < max_i; i++) {
 					svg_one.append("line")
 						.attr("x1", left_start + (100 * i))
 						.attr("y1", top_start)
@@ -202,18 +214,6 @@ title: Neighborhood Profiles
 						return d;
 					});
 				chart = svg_one;
-			}
-
-			function max_of_list(list) {
-				console.log('in max_of_list');
-				console.log(list);
-				var maximum_value = 0;
-				for (i = 0; i < list.length; i++) {
-					console.log(list[i]['val']);
-					maximum_value = list[i]['val'] > maximum_value ? list[i]['val'] : maximum_value;
-				}
-				console.log('maximum value',maximum_value);
-				return maximum_value;
 			}
 			change_chart();
 
