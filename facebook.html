@@ -156,6 +156,11 @@ title: Facebook Data
 							.data(keys)
 							.enter();
 				var max_i = (max_of_list(visible_data) / 100) + 1;
+				var divisor = 1; 
+				while (max_i > 7) { 
+					divisor = divisor+1;
+					max_i = (max_of_list(visible_data) / (100*divisor)) + 1;
+				}
 				for (var i = 0; i < max_i; i++) {
 					svg_one.append("line")
 						.attr("x1", left_start + (100 * i))
@@ -169,7 +174,7 @@ title: Facebook Data
 						.attr("x", left_start + (100 * i))
 						.attr("y", line_height + 15)
 						.attr("text-anchor", "middle")
-						.text(i * 100);
+						.text(i * 100 * divisor);
 				}
 				d.append("rect")
 					.attr("x", left_start)
@@ -179,7 +184,7 @@ title: Facebook Data
 					})
 					.attr("width", function(d) {
 						console.log(visible_data[d][0]);
-						return visible_data[d][0];
+						return visible_data[d][0] / divisor;
 					})
 					.attr("height", 20)
 					.attr("fill", "#f38670")
@@ -193,7 +198,7 @@ title: Facebook Data
 					});
 				d.append("text")
 					.attr("x", function(d) {
-						return left_start + visible_data[d][0] + text_left_margin;
+						return left_start + (visible_data[d][0] / divisor) + text_left_margin;
 					})
 					.attr("y", function(d, i) {
 						return ((bar_height + inter_bar_margin) * i) + top_start + line_margin + (bar_height / 2);
