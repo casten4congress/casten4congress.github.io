@@ -72,6 +72,7 @@ title: Precinct Data
 				<option value='languagesAndVT'>Spanish speakers and turnout</option>
 				<option value='VT'>Voter turnout</option>
 				<option value="blank" checked>Blank with Precinct Names</option>
+				<option value='pp'>Precinct Prioritization</option>
 			</select>
 		</div>
 		<div id="2016PrimaryPresidential">
@@ -129,6 +130,7 @@ title: Precinct Data
 		<script type="text/javascript" src="data/electiondata/electiondata.js"></script>
 		<script type='text/javascript' src='data/language/language_spoken.js'></script>
 		<script type='text/javascript' src='data/turnout/voter_turnout.js'></script>
+		<script type='text/javascript' src='data/electiondata/Precinct Prioritization/PrecinctPrioritization.js'></script>
 		<script type="text/javascript">
 			var gradient = ["#e5004d", "#ce0758", "#b70e63", "#a0166f", "#891d7a", "#722586", "#5b2c91", "#44339c", "#2d3ba8", "#1642b3", "#004abf"];
 			var pop_gradient = ["#FFFFFF", "#eaf8f1", "#d5f1e3", "#c1ead5", "#ace3c7", "#97dcba", "#83d5ac", "#6ece9e", "#59C790", "#45c183"];
@@ -149,6 +151,7 @@ title: Precinct Data
 			var legend;
 			var primary_divs = ['2016PrimaryPresidential', '2012PrimaryCongressional', '2014PrimaryCongressional','2016PrimaryCongressional','2018PrimaryCongressional','2012PrimaryPresidential'];
 			var primary_candidates_dict = {'2016PrimaryPresidential': primary_candidates_2016_P, '2016PrimaryCongressional': primary_candidates_2016, '2014PrimaryCongressional': primary_candidates_2014, '2012PrimaryCongressional': primary_candidates_2012, '2018PrimaryCongressional': primary_candidates_2018};
+			var office_colors = {'Downers Grove': '#0061ff' , 'Barrington': '#16a31d' , 'Elgin': '#d1881b' ,'West Chicago': '#c40528', '': '#000000'};
 
 			function create_map(type, census_tractsP) {
 				if (typeof map != 'undefined') {
@@ -189,6 +192,9 @@ title: Precinct Data
 
 					var pop_quantize = d3.scale.quantize()
 						.domain([0,10])
+						.range(pop_gradient);
+					var pp_quantize = d3.scale.quantize()
+						.domain([1141,4460])
 						.range(pop_gradient);
 
 					svg.selectAll("path")
@@ -237,10 +243,11 @@ title: Precinct Data
 								else { return 'red' }
 							}
 							if (type=='VT') {
-								// if (county=='kane') { precinct_name = kane_precinct_name; }
-								console.log(precinct_name);
-								console.log(vt[precinct_name]);
 								return pop_quantize(vt[precinct_name]*100)
+							}
+							if (type=='pp') {
+								var p = pp[precinct_name] || {'Weighted Score': 0};
+								return pp_quantize(p['Weighted Score']);
 							}
 							if ((precincts.indexOf(precinct_name) > -1) && (document.getElementById('election_dropdown').value in electiondata[county][precinct_name])) {
 								if (document.getElementById('election_dropdown').value.indexOf('Primary')>-1) {
@@ -263,7 +270,27 @@ title: Precinct Data
 								} else { return quantize(electiondata[county][precinct_name][type]['Democrat'] - electiondata[county][precinct_name][type]['Republican']); }
 							} else { return "#ffffff"; }
 						})
-						.attr("stroke", "#000000")
+						.attr("stroke", function(d){
+							if (type=='pp') {
+								var precinct_name = "";
+								if ('idpct_txt' in d.properties) {
+									precinct_name = d.properties.idpct_txt;
+								} else if ('PrecinctNa' in d.properties) {
+									precinct_name = d.properties.PrecinctNa;
+								} else if ('TWP_PCT' in d.properties) {
+									precinct_name = d.properties.TWP_PCT;
+								} else {
+									if (d.properties.PRECINCT.indexOf(" ") > -1) {
+										precinct_name = d.properties.PRECINCT; 
+									} else {
+										precinct_name = d.properties.PRECINCT.charAt(0) + d.properties.PRECINCT.charAt(1) + "00" + d.properties.PRECINCT.charAt(2) + d.properties.PRECINCT.charAt(3);
+									}
+								}
+								var p = pp[precinct_name] || {'Office': ''};
+								return office_colors[p['Office']];
+							}
+							return "#00000"
+						})
 						.attr("stroke-width", "1")
 						.on('click', function(d) {
 							var precinct_name = "";
