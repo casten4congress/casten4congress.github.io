@@ -73,6 +73,7 @@ title: Precinct Data
 				<option value='VT'>Voter turnout</option>
 				<option value="blank" checked>Blank with Precinct Names</option>
 				<option value='pp'>Precinct Prioritization</option>
+				<option value='ct'>Census Tract Overlay</option>
 			</select>
 		</div>
 		<div id="2016PrimaryPresidential">
@@ -153,7 +154,7 @@ title: Precinct Data
 			var primary_candidates_dict = {'2016PrimaryPresidential': primary_candidates_2016_P, '2016PrimaryCongressional': primary_candidates_2016, '2014PrimaryCongressional': primary_candidates_2014, '2012PrimaryCongressional': primary_candidates_2012, '2018PrimaryCongressional': primary_candidates_2018};
 			var office_colors = {'Downers Grove': '#0061ff' , 'Barrington': '#16a31d' , 'Elgin': '#d1881b' ,'West Chicago': '#c40528', '': '#000000'};
 
-			function create_map(type, census_tractsP) {
+			function create_map(type) {
 				if (typeof map != 'undefined') {
 					map.remove();
 				}
@@ -197,7 +198,7 @@ title: Precinct Data
 						.domain([1141,4460])
 						.range(pop_gradient);
 
-					svg.selectAll("path")
+					svg.selectAll("precinct")
 						.data(county_data.features)
 						.enter()
 						.append("path")
@@ -389,6 +390,21 @@ title: Precinct Data
 							            });
 							        });
 						}
+						if (type=='ct') {
+							d3.json("data/census/illinois_censustracts_2016/relevant_census_tracts.json" , function(error, census_data) {
+								if (error) console.log(error);
+								svg.selectAll("tracts")
+									.data(census_data.features)
+									.enter()
+									.append("path")
+									.attr("d", function(d) {
+										return path(d);
+									})
+									.attr("fill", 'none')
+									.attr('stroke', '#ff0000')
+									.attr('stroke-width', '1');
+							});	
+					}
 				});
 				map = svg;
 			}
@@ -420,7 +436,7 @@ title: Precinct Data
 				if (typeof map != 'undefined') {
 					map.remove();
 				}
-				create_map(document.getElementById('election_dropdown').value, false);
+				create_map(document.getElementById('election_dropdown').value);
 
 			}
 
