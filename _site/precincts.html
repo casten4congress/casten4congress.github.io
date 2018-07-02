@@ -215,10 +215,9 @@
 			var legend;
 			var primary_divs = ['2016PrimaryPresidential', '2012PrimaryCongressional', '2014PrimaryCongressional','2016PrimaryCongressional','2018PrimaryCongressional','2012PrimaryPresidential'];
 			var primary_candidates_dict = {'2016PrimaryPresidential': primary_candidates_2016_P, '2016PrimaryCongressional': primary_candidates_2016, '2014PrimaryCongressional': primary_candidates_2014, '2012PrimaryCongressional': primary_candidates_2012, '2018PrimaryCongressional': primary_candidates_2018};
-			var office_colors = {'Downers Grove': '#0061ff' , 'Barrington': '#16a31d' , 'Elgin': '#d1881b' ,'West Chicago': '#c40528', '': '#000000'};
+			var office_colors = {'Downers Grove': '#0061ff' , 'DG': '#0061ff' ,'Barrington': '#16a31d' , 'Elgin': '#d1881b' ,'WC': '#c40528', 'West Chicago': '#c40528', '': '#000000', 'Wheaton': '#aa42f4'};
 
 			function create_map(type) {
-				console.log('type ', type);
 				if (typeof map != 'undefined') {
 					map.remove();
 				}
@@ -455,17 +454,13 @@
 							        });
 						}
 						if (type=='ct') {
-							console.log('in if');
 							d3.json("data/census/illinois_censustracts_2016/relevant_census_tracts.json" , function(error, census_data) {
 								if (error) console.log(error);
-								console.log(census_data);
 								svg.selectAll("tracts")
 									.data(census_data.features)
 									.enter()
 									.append("path")
 									.attr("d", function(d) {
-										// console.log(d);
-										console.log(path(d));
 										return path(d);
 									})
 									.attr("fill", 'none')
