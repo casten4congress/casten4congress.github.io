@@ -73,6 +73,7 @@ title: Precinct Data
 				<option value='VT'>Voter turnout</option>
 				<option value="blank" checked>Blank with Precinct Names</option>
 				<option value='pp'>Precinct Prioritization</option>
+				<option value='vr'>Voter Registration Hotspots</option>
 				<option value='ct'>Census Tract Overlay</option>
 			</select>
 		</div>
@@ -132,6 +133,7 @@ title: Precinct Data
 		<script type='text/javascript' src='data/language/language_spoken.js'></script>
 		<script type='text/javascript' src='data/turnout/voter_turnout.js'></script>
 		<script type='text/javascript' src='data/electiondata/Precinct Prioritization/PrecinctPrioritization.js'></script>
+		<script type='text/javascript' src='data/electiondata/Precinct Prioritization/VR.js'></script>
 		<script type="text/javascript">
 			var gradient = ["#e5004d", "#ce0758", "#b70e63", "#a0166f", "#891d7a", "#722586", "#5b2c91", "#44339c", "#2d3ba8", "#1642b3", "#004abf"];
 			var pop_gradient = ["#FFFFFF", "#eaf8f1", "#d5f1e3", "#c1ead5", "#ace3c7", "#97dcba", "#83d5ac", "#6ece9e", "#59C790", "#45c183"];
@@ -197,6 +199,9 @@ title: Precinct Data
 					var pp_quantize = d3.scale.quantize()
 						.domain([1141,4460])
 						.range(pop_gradient);
+					var vr_quantize = d3.scale.quantize()
+						.domain([20, 80])
+						.range(pop_gradient);
 
 					svg.selectAll("precinct")
 						.data(county_data.features)
@@ -249,6 +254,10 @@ title: Precinct Data
 							if (type=='pp') {
 								var p = pp[precinct_name] || {'Weighted Score': 0};
 								return pp_quantize(p['Weighted Score']);
+							}
+							if (type=='vr') {
+								var p = vr[precinct_name] || 0
+								return vr_quantize(p);
 							}
 							if ((precincts.indexOf(precinct_name) > -1) && (document.getElementById('election_dropdown').value in electiondata[county][precinct_name])) {
 								if (document.getElementById('election_dropdown').value.indexOf('Primary')>-1) {
